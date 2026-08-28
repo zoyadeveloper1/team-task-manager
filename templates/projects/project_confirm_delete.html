@@ -1,0 +1,2073 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Delete Project | Team Task Manager
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           DESIGN SYSTEM
+        ====================================================== */
+
+        :root {
+
+            --sidebar: #0b1220;
+            --sidebar-deep: #090f1a;
+
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+
+            --danger: #dc2626;
+            --danger-dark: #b91c1c;
+            --danger-soft: #fef2f2;
+
+            --text: #0f172a;
+            --muted: #64748b;
+            --light-muted: #94a3b8;
+
+            --border: #e7ebf0;
+
+            --surface: #ffffff;
+            --page: #f6f8fb;
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+                var(--page);
+
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           APPLICATION
+        ====================================================== */
+
+        .app {
+
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 245px;
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--sidebar),
+                    var(--sidebar-deep)
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .sidebar-brand {
+
+            min-height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                0 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .brand-mark {
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #2563eb
+                );
+
+            font-size: 15px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px
+                rgba(37,99,235,.18);
+        }
+
+
+        .brand-name {
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 3px;
+
+            color: #64748b;
+
+            font-size: 9px;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                20px 14px 7px;
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                .8px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .nav-list {
+
+            padding:
+                0 10px;
+        }
+
+
+        .nav-link {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding:
+                11px 12px;
+
+            margin-bottom:
+                4px;
+
+            border-radius:
+                10px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                11px;
+
+            font-weight:
+                500;
+
+            transition:
+                background .2s ease,
+                color .2s ease,
+                transform .2s ease;
+        }
+
+
+        .nav-link:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,.05);
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .nav-link.active {
+
+            color:
+                white;
+
+            background:
+                rgba(99,102,241,.15);
+
+            box-shadow:
+                inset 3px 0 0
+                #6366f1;
+        }
+
+
+        .nav-icon {
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(255,255,255,.04);
+
+            font-size:
+                13px;
+        }
+
+
+        .sidebar-spacer {
+
+            flex: 1;
+        }
+
+
+        .sidebar-footer {
+
+            padding:
+                14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+
+        .sidebar-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                10px;
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,.035);
+        }
+
+
+        .sidebar-avatar {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                10px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .sidebar-user-name {
+
+            color:
+                white;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+        }
+
+
+        .sidebar-user-role {
+
+            margin-top:
+                2px;
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            width:
+                calc(100% - 245px);
+
+            margin-left:
+                245px;
+
+            min-height:
+                100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .topbar {
+
+            min-height:
+                74px;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+            padding:
+                0 28px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            background:
+                rgba(255,255,255,.92);
+
+            backdrop-filter:
+                blur(16px);
+
+            -webkit-backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .topbar-title {
+
+            margin:
+                0;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -.4px;
+        }
+
+
+        .topbar-subtitle {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        .topbar-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+        }
+
+
+        .topbar-avatar {
+
+            width:
+                35px;
+
+            height:
+                35px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                10px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .system-pill {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                8px 10px;
+
+            border-radius:
+                9px;
+
+            color:
+                #15803d;
+
+            background:
+                #f4fbf6;
+
+            border:
+                1px solid
+                #dcefe3;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .system-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+
+            animation:
+                pulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+
+                opacity:
+                    .5;
+
+                transform:
+                    scale(.8);
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.15);
+            }
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            min-height:
+                calc(100vh - 74px);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                45px 24px;
+        }
+
+
+        /* =====================================================
+           CONFIRMATION WRAPPER
+        ====================================================== */
+
+        .confirm-wrapper {
+
+            width:
+                100%;
+
+            max-width:
+                650px;
+
+            animation:
+                reveal .65s
+                cubic-bezier(.16,1,.3,1)
+                both;
+        }
+
+
+        @keyframes reveal {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(18px)
+                    scale(.98);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =====================================================
+           BREADCRUMB
+        ====================================================== */
+
+        .breadcrumb-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                16px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .breadcrumb-row a {
+
+            color:
+                #64748b;
+        }
+
+
+        .breadcrumb-row a:hover {
+
+            color:
+                var(--primary);
+        }
+
+
+        /* =====================================================
+           CONFIRM CARD
+        ====================================================== */
+
+        .confirm-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                20px;
+
+            box-shadow:
+                0 25px 65px
+                rgba(15,23,42,.08);
+        }
+
+
+        .confirm-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ef4444,
+                    #dc2626,
+                    #b91c1c
+                );
+        }
+
+
+        .confirm-body {
+
+            padding:
+                42px 42px 35px;
+
+            text-align:
+                center;
+        }
+
+
+        /* =====================================================
+           WARNING ICON
+        ====================================================== */
+
+        .warning-wrap {
+
+            position:
+                relative;
+
+            width:
+                76px;
+
+            height:
+                76px;
+
+            margin:
+                0 auto 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .warning-ring {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(220,38,38,.16);
+
+            animation:
+                warningRing
+                2.8s
+                ease-out
+                infinite;
+        }
+
+
+        @keyframes warningRing {
+
+            0% {
+
+                opacity:
+                    .7;
+
+                transform:
+                    scale(.85);
+            }
+
+            70% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1.28);
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1.28);
+            }
+        }
+
+
+        .warning-icon {
+
+            width:
+                56px;
+
+            height:
+                56px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                16px;
+
+            color:
+                var(--danger);
+
+            background:
+                var(--danger-soft);
+
+            border:
+                1px solid
+                #fee2e2;
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+
+            box-shadow:
+                0 10px 25px
+                rgba(220,38,38,.08);
+        }
+
+
+        /* =====================================================
+           TITLES
+        ====================================================== */
+
+        .confirm-title {
+
+            margin:
+                0;
+
+            font-size:
+                26px;
+
+            line-height:
+                1.2;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -.7px;
+        }
+
+
+        .confirm-subtitle {
+
+            max-width:
+                500px;
+
+            margin:
+                10px auto 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.75;
+        }
+
+
+        /* =====================================================
+           PROJECT PREVIEW
+        ====================================================== */
+
+        .project-preview {
+
+            margin:
+                26px auto 0;
+
+            max-width:
+                470px;
+
+            padding:
+                16px;
+
+            text-align:
+                left;
+
+            border:
+                1px solid
+                #eef1f4;
+
+            border-radius:
+                13px;
+
+            background:
+                #f8fafc;
+        }
+
+
+        .preview-label {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                .45px;
+        }
+
+
+        .preview-name {
+
+            margin-top:
+                5px;
+
+            color:
+                #0f172a;
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+
+            word-break:
+                break-word;
+        }
+
+
+        .preview-warning {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                7px;
+
+            margin-top:
+                13px;
+
+            padding-top:
+                12px;
+
+            border-top:
+                1px solid
+                #e8edf2;
+
+            color:
+                #991b1b;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .actions {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                9px;
+
+            margin-top:
+                25px;
+        }
+
+
+        .cancel-btn,
+        .delete-btn {
+
+            min-height:
+                42px;
+
+            padding:
+                0 17px;
+
+            border-radius:
+                9px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+
+        .cancel-btn {
+
+            color:
+                #475569;
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                #dfe5eb;
+        }
+
+
+        .cancel-btn:hover {
+
+            color:
+                #1e293b;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(15,23,42,.06);
+        }
+
+
+        .delete-btn {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            border:
+                none;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef4444,
+                    #dc2626
+                );
+
+            box-shadow:
+                0 10px 22px
+                rgba(220,38,38,.18);
+
+            cursor:
+                pointer;
+        }
+
+
+        .delete-btn::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                -120%;
+
+            width:
+                70%;
+
+            height:
+                100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.25),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left .7s ease;
+        }
+
+
+        .delete-btn:hover {
+
+            color:
+                white;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 15px 28px
+                rgba(220,38,38,.25);
+        }
+
+
+        .delete-btn:hover::before {
+
+            left:
+                140%;
+        }
+
+
+        .delete-text {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+        }
+
+
+        /* =====================================================
+           FOOTNOTE
+        ====================================================== */
+
+        .security-note {
+
+            margin-top:
+                19px;
+
+            color:
+                #a3abb6;
+
+            font-size:
+                8px;
+
+            text-align:
+                center;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            margin-top:
+                14px;
+
+            padding:
+                13px 15px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(255,255,255,.86);
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .footer-status {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            color:
+                #64748b;
+        }
+
+
+        .footer-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                width:
+                    72px;
+            }
+
+
+            .brand-name,
+            .brand-subtitle,
+            .sidebar-section,
+            .nav-link span:not(.nav-icon),
+            .sidebar-user > div:not(.sidebar-avatar) {
+
+                display:
+                    none;
+            }
+
+
+            .sidebar-brand {
+
+                justify-content:
+                    center;
+
+                padding:
+                    0;
+            }
+
+
+            .nav-link {
+
+                justify-content:
+                    center;
+
+                padding:
+                    10px;
+            }
+
+
+            .main {
+
+                width:
+                    calc(100% - 72px);
+
+                margin-left:
+                    72px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .topbar {
+
+                min-height:
+                    64px;
+
+                padding:
+                    0 14px;
+            }
+
+
+            .topbar-subtitle,
+            .system-pill {
+
+                display:
+                    none;
+            }
+
+
+            .topbar-title {
+
+                font-size:
+                    15px;
+            }
+
+
+            .content {
+
+                padding:
+                    28px 14px 35px;
+            }
+
+
+            .confirm-body {
+
+                padding:
+                    36px 20px 28px;
+            }
+
+
+            .confirm-title {
+
+                font-size:
+                    23px;
+            }
+
+
+            .confirm-subtitle {
+
+                font-size:
+                    10px;
+            }
+
+
+            .actions {
+
+                flex-direction:
+                    column;
+            }
+
+
+            .cancel-btn,
+            .delete-btn {
+
+                width:
+                    100%;
+            }
+
+
+            .footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                T
+            </div>
+
+
+            <div>
+
+                <div class="brand-name">
+                    Team Task Manager
+                </div>
+
+                <div class="brand-subtitle">
+                    Admin Console
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            Workspace
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'accounts:admin_dashboard' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'projects:project_list' %}"
+                class="nav-link active"
+            >
+
+                <span class="nav-icon">
+                    □
+                </span>
+
+                <span>
+                    Projects
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_list' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                <span>
+                    Tasks
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:team_members' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ◎
+                </span>
+
+                <span>
+                    Team Members
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            Create
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'projects:project_create' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Project
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_create' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Task
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:add_team_member' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    Add Member
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="sidebar-footer">
+
+
+            <div class="sidebar-user">
+
+
+                <div class="sidebar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <div class="sidebar-user-name">
+
+                        {{ request.user.username }}
+
+                    </div>
+
+
+                    <div class="sidebar-user-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1 class="topbar-title">
+                    Delete Project
+                </h1>
+
+                <p class="topbar-subtitle">
+                    Review this action before continuing.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <div class="system-pill">
+
+                    <span class="system-dot"></span>
+
+                    All systems operational
+
+                </div>
+
+
+                <div class="topbar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'accounts:logout' %}"
+                    class="btn btn-sm btn-outline-dark"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+
+        <div class="content">
+
+
+            <div class="confirm-wrapper">
+
+
+                <!-- Breadcrumb -->
+
+                <div class="breadcrumb-row">
+
+                    <a
+                        href="{% url 'accounts:admin_dashboard' %}"
+                    >
+                        Dashboard
+                    </a>
+
+                    <span>
+                        /
+                    </span>
+
+                    <a
+                        href="{% url 'projects:project_list' %}"
+                    >
+                        Projects
+                    </a>
+
+                    <span>
+                        /
+                    </span>
+
+                    <span>
+                        Delete
+                    </span>
+
+                </div>
+
+
+
+                <!-- Confirmation Card -->
+
+                <section class="confirm-card">
+
+
+                    <div class="confirm-body">
+
+
+                        <!-- WARNING -->
+
+                        <div class="warning-wrap">
+
+                            <div class="warning-ring"></div>
+
+                            <div class="warning-icon">
+                                !
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- TITLE -->
+
+                        <h2 class="confirm-title">
+
+                            Delete this project?
+
+                        </h2>
+
+
+                        <p class="confirm-subtitle">
+
+                            This action permanently removes the project
+                            from your workspace. Please make sure you
+                            no longer need this project before continuing.
+
+                        </p>
+
+
+
+                        <!-- PROJECT PREVIEW -->
+
+                        <div class="project-preview">
+
+
+                            <div class="preview-label">
+                                Project selected for deletion
+                            </div>
+
+
+                            <div class="preview-name">
+
+                                {{ project.name }}
+
+                            </div>
+
+
+                            <div class="preview-warning">
+
+                                <span>
+                                    !
+                                </span>
+
+                                <span>
+
+                                    This action cannot be undone.
+
+                                    Make sure you've reviewed the project
+                                    before confirming deletion.
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="actions">
+
+
+                            <a
+                                href="{% url 'projects:project_list' %}"
+                                class="cancel-btn"
+                            >
+                                ← Cancel
+                            </a>
+
+
+                            <form
+                                method="POST"
+                                id="deleteForm"
+                            >
+
+                                {% csrf_token %}
+
+
+                                <button
+                                    type="submit"
+                                    class="delete-btn"
+                                >
+
+                                    <span class="delete-text">
+                                        Delete Project
+                                    </span>
+
+                                </button>
+
+                            </form>
+
+
+                        </div>
+
+
+
+                        <!-- SECURITY -->
+
+                        <div class="security-note">
+
+                            Administrative action · Project deletion requires confirmation.
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- FOOTER -->
+
+                <footer class="footer">
+
+
+                    <div>
+
+                        Team Task Manager · Project Workspace
+
+                    </div>
+
+
+                    <div class="footer-status">
+
+                        <span class="footer-dot"></span>
+
+                        Workspace active
+
+                    </div>
+
+
+                </footer>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     DELETE CONFIRMATION
+========================================================= -->
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const form =
+                document.getElementById(
+                    "deleteForm"
+                );
+
+
+            if (!form) {
+                return;
+            }
+
+
+            form.addEventListener(
+                "submit",
+                function (event) {
+
+                    const confirmed =
+                        window.confirm(
+                            "Are you sure you want to permanently delete this project?"
+                        );
+
+
+                    if (!confirmed) {
+
+                        event.preventDefault();
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+```

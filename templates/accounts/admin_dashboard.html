@@ -1,0 +1,3403 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Dashboard | Team Task Manager
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+
+            --sidebar:
+                #0b1220;
+
+            --sidebar-light:
+                #111a2b;
+
+            --primary:
+                #4f46e5;
+
+            --primary-soft:
+                #eef2ff;
+
+            --success:
+                #16a34a;
+
+            --success-soft:
+                #ecfdf3;
+
+            --warning:
+                #d97706;
+
+            --warning-soft:
+                #fff7ed;
+
+            --danger:
+                #dc2626;
+
+            --danger-soft:
+                #fef2f2;
+
+            --text:
+                #0f172a;
+
+            --muted:
+                #64748b;
+
+            --border:
+                #e7ebf0;
+
+            --surface:
+                #ffffff;
+
+            --page:
+                #f7f8fc;
+
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           APP LAYOUT
+        ====================================================== */
+
+        .app {
+
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 245px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--sidebar),
+                    #0a1020
+                );
+
+            color:
+                #cbd5e1;
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            z-index: 1000;
+        }
+
+
+        .sidebar-brand {
+
+            min-height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                0 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .brand-mark {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #3b82f6
+                );
+
+            color:
+                white;
+
+            font-weight:
+                800;
+
+            font-size:
+                15px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(59,130,246,0.20);
+        }
+
+
+        .brand-copy {
+
+            min-width: 0;
+        }
+
+
+        .brand-title {
+
+            color:
+                white;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            line-height:
+                1.2;
+        }
+
+
+        .brand-subtitle {
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+
+            margin-top:
+                3px;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                20px 14px 7px;
+
+            color:
+                #64748b;
+
+            text-transform:
+                uppercase;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                0.8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .nav-list {
+
+            padding:
+                0 10px;
+        }
+
+
+        .nav-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                11px 12px;
+
+            margin-bottom:
+                4px;
+
+            border-radius:
+                10px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                11px;
+
+            font-weight:
+                500;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .nav-item:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .nav-item.active {
+
+            color:
+                white;
+
+            background:
+                rgba(99,102,241,0.16);
+
+            box-shadow:
+                inset 3px 0 0
+                #6366f1;
+        }
+
+
+        .nav-icon {
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            font-size:
+                13px;
+        }
+
+
+        .nav-item.active .nav-icon {
+
+            background:
+                rgba(99,102,241,0.16);
+        }
+
+
+        .sidebar-spacer {
+            flex: 1;
+        }
+
+
+        .sidebar-footer {
+
+            padding:
+                14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .sidebar-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                10px;
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.035);
+        }
+
+
+        .sidebar-avatar {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #2563eb
+                );
+
+            color:
+                white;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .sidebar-user-name {
+
+            color:
+                white;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+        }
+
+
+        .sidebar-user-role {
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+
+            margin-top:
+                2px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            width: calc(100% - 245px);
+
+            margin-left: 245px;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .topbar {
+
+            height: 74px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 28px;
+
+            background:
+                rgba(255,255,255,0.90);
+
+            backdrop-filter:
+                blur(16px);
+
+            -webkit-backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .topbar-left h1 {
+
+            margin: 0;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -0.4px;
+        }
+
+
+        .topbar-left p {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .status-pill {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px 10px;
+
+            border:
+                1px solid
+                #dcefe3;
+
+            border-radius:
+                9px;
+
+            background:
+                #f4fbf6;
+
+            color:
+                #15803d;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+
+            box-shadow:
+                0 0 8px
+                rgba(34,197,94,0.40);
+
+            animation:
+                statusPulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                opacity:
+                    0.5;
+
+                transform:
+                    scale(0.8);
+            }
+
+            50% {
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.15);
+            }
+
+        }
+
+
+        .topbar-avatar {
+
+            width: 35px;
+            height: 35px;
+
+            border-radius:
+                10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            color:
+                white;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            padding:
+                28px;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-height:
+                235px;
+
+            border-radius:
+                18px;
+
+            padding:
+                32px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #18264d 55%,
+                    #243b77
+                );
+
+            box-shadow:
+                0 20px 50px
+                rgba(15,23,42,0.12);
+
+            animation:
+                reveal 0.65s ease both;
+        }
+
+
+        @keyframes reveal {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        .hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius:
+                50%;
+
+            right:
+                -240px;
+
+            top:
+                -300px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            animation:
+                heroRotate 18s linear infinite;
+        }
+
+
+        @keyframes heroRotate {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width:
+                720px;
+        }
+
+
+        .hero-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                6px 9px;
+
+            border-radius:
+                7px;
+
+            color:
+                #c7d2fe;
+
+            background:
+                rgba(99,102,241,0.13);
+
+            border:
+                1px solid
+                rgba(129,140,248,0.18);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.65px;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .hero-eyebrow-dot {
+
+            width: 5px;
+            height: 5px;
+
+            border-radius:
+                50%;
+
+            background:
+                #818cf8;
+        }
+
+
+        .hero-title {
+
+            margin: 0;
+
+            color:
+                white;
+
+            font-size:
+                clamp(28px, 3vw, 42px);
+
+            line-height:
+                1.1;
+
+            letter-spacing:
+                -1.4px;
+
+            font-weight:
+                800;
+        }
+
+
+        .hero-title span {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #c7d2fe,
+                    #93c5fd
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .hero-description {
+
+            max-width:
+                620px;
+
+            margin:
+                12px 0 0;
+
+            color:
+                rgba(226,232,240,0.68);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .hero-actions {
+
+            display: flex;
+
+            gap:
+                8px;
+
+            margin-top:
+                20px;
+        }
+
+
+        .hero-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height:
+                34px;
+
+            padding:
+                0 12px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .hero-btn-primary {
+
+            color:
+                #0f172a;
+
+            background:
+                white;
+        }
+
+
+        .hero-btn-primary:hover {
+
+            color:
+                #0f172a;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .hero-btn-secondary {
+
+            color:
+                rgba(255,255,255,0.88);
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+        }
+
+
+        .hero-btn-secondary:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,0.11);
+        }
+
+
+        .hero-side {
+
+            position: relative;
+
+            z-index: 2;
+
+            width:
+                170px;
+
+            height:
+                170px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .hero-orbit {
+
+            position: absolute;
+
+            inset:
+                10px;
+
+            border:
+                1px dashed
+                rgba(147,197,253,0.20);
+
+            border-radius:
+                50%;
+
+            animation:
+                orbit 12s linear infinite;
+        }
+
+
+        .hero-orbit::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            top:
+                -4px;
+
+            left:
+                50%;
+
+            border-radius:
+                50%;
+
+            background:
+                #93c5fd;
+
+            box-shadow:
+                0 0 15px
+                rgba(147,197,253,0.8);
+        }
+
+
+        @keyframes orbit {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        .hero-center {
+
+            width:
+                104px;
+
+            height:
+                104px;
+
+            border-radius:
+                50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,0,0,0.18);
+
+            font-size:
+                34px;
+
+            animation:
+                heroFloat 4s ease-in-out infinite;
+        }
+
+
+        @keyframes heroFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-6px);
+            }
+        }
+
+
+        /* =====================================================
+           KPI
+        ====================================================== */
+
+        .kpi-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                14px;
+
+            margin-top:
+                14px;
+        }
+
+
+        .kpi {
+
+            position: relative;
+
+            padding:
+                18px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            background:
+                var(--surface);
+
+            box-shadow:
+                0 7px 25px
+                rgba(15,23,42,0.035);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .kpi:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 16px 32px
+                rgba(15,23,42,0.065);
+        }
+
+
+        .kpi-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .kpi-label {
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+            font-weight:
+                600;
+        }
+
+
+        .kpi-icon {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border-radius:
+                10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size:
+                14px;
+
+            background:
+                #f8fafc;
+        }
+
+
+        .kpi-value {
+
+            margin-top:
+                11px;
+
+            font-size:
+                27px;
+
+            line-height:
+                1;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -0.9px;
+        }
+
+
+        .kpi-note {
+
+            margin-top:
+                7px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        .kpi-primary .kpi-icon {
+            background:
+                var(--primary-soft);
+        }
+
+
+        .kpi-success .kpi-icon {
+            background:
+                var(--success-soft);
+        }
+
+
+        .kpi-warning .kpi-icon {
+            background:
+                var(--warning-soft);
+        }
+
+
+        .kpi-danger .kpi-icon {
+            background:
+                var(--danger-soft);
+        }
+
+
+        /* =====================================================
+           MAIN TWO COLUMN
+        ====================================================== */
+
+        .workspace {
+
+            display: grid;
+
+            grid-template-columns:
+                1.55fr 0.85fr;
+
+            gap:
+                14px;
+
+            margin-top:
+                14px;
+        }
+
+
+        .panel {
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            background:
+                var(--surface);
+
+            box-shadow:
+                0 7px 25px
+                rgba(15,23,42,0.035);
+        }
+
+
+        .panel-head {
+
+            padding:
+                18px 18px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .panel-title {
+
+            margin:
+                0;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .panel-subtitle {
+
+            margin:
+                4px 0 0;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        .panel-action {
+
+            padding:
+                7px 9px;
+
+            border-radius:
+                8px;
+
+            background:
+                #f8fafc;
+
+            color:
+                #475569;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            transition:
+                background 0.2s ease;
+        }
+
+
+        .panel-action:hover {
+
+            background:
+                #eef2ff;
+
+            color:
+                #4338ca;
+        }
+
+
+        /* =====================================================
+           PROGRESS PANEL
+        ====================================================== */
+
+        .progress-content {
+
+            padding:
+                20px 18px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap:
+                28px;
+        }
+
+
+        .progress-circle {
+
+            position: relative;
+
+            width:
+                145px;
+
+            height:
+                145px;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                conic-gradient(
+                    var(--primary)
+                    calc(var(--progress) * 1%),
+                    #edf0f4
+                    0
+                );
+
+            animation:
+                progressIn 1.1s ease both;
+        }
+
+
+        .progress-circle::before {
+
+            content: "";
+
+            position: absolute;
+
+            width:
+                113px;
+
+            height:
+                113px;
+
+            border-radius:
+                50%;
+
+            background:
+                white;
+        }
+
+
+        .progress-inner {
+
+            position: relative;
+
+            z-index:
+                2;
+
+            text-align:
+                center;
+        }
+
+
+        .progress-value {
+
+            font-size:
+                28px;
+
+            line-height:
+                1;
+
+            font-weight:
+                800;
+        }
+
+
+        .progress-label {
+
+            margin-top:
+                4px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        @keyframes progressIn {
+
+            from {
+                transform:
+                    rotate(-90deg)
+                    scale(0.75);
+
+                opacity:
+                    0;
+            }
+
+            to {
+                transform:
+                    rotate(0deg)
+                    scale(1);
+
+                opacity:
+                    1;
+            }
+        }
+
+
+        .progress-details {
+
+            flex:
+                1;
+        }
+
+
+        .detail-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-bottom:
+                8px;
+
+            margin-bottom:
+                12px;
+
+            border-bottom:
+                1px solid
+                #f1f5f9;
+        }
+
+
+        .detail-row:last-child {
+
+            margin-bottom:
+                0;
+
+            border-bottom:
+                0;
+
+            padding-bottom:
+                0;
+        }
+
+
+        .detail-label {
+
+            color:
+                #64748b;
+
+            font-size:
+                10px;
+        }
+
+
+        .detail-value {
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+        }
+
+
+        .mini-bar {
+
+            height:
+                5px;
+
+            border-radius:
+                99px;
+
+            overflow:
+                hidden;
+
+            background:
+                #edf1f5;
+
+            margin-top:
+                7px;
+        }
+
+
+        .mini-bar span {
+
+            display:
+                block;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #4f46e5,
+                    #60a5fa
+                );
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ====================================================== */
+
+        .action-list {
+
+            padding:
+                18px;
+        }
+
+
+        .quick-action {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                11px;
+
+            margin-bottom:
+                8px;
+
+            border:
+                1px solid
+                #edf1f5;
+
+            border-radius:
+                11px;
+
+            color:
+                #334155;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .quick-action:last-child {
+
+            margin-bottom:
+                0;
+        }
+
+
+        .quick-action:hover {
+
+            transform:
+                translateX(4px);
+
+            border-color:
+                #c7d2fe;
+
+            box-shadow:
+                0 8px 22px
+                rgba(79,70,229,0.06);
+        }
+
+
+        .quick-icon {
+
+            width:
+                33px;
+
+            height:
+                33px;
+
+            border-radius:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #f8fafc;
+
+            font-size:
+                13px;
+        }
+
+
+        .quick-text {
+
+            flex:
+                1;
+        }
+
+
+        .quick-title {
+
+            display:
+                block;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            color:
+                #1e293b;
+        }
+
+
+        .quick-desc {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .quick-arrow {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =====================================================
+           MANAGEMENT
+        ====================================================== */
+
+        .management {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                14px;
+
+            margin-top:
+                14px;
+        }
+
+
+        .management-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                19px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            background:
+                white;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .management-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 16px 35px
+                rgba(15,23,42,0.07);
+        }
+
+
+        .management-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .management-icon {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            border-radius:
+                11px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                17px;
+        }
+
+
+        .project-icon {
+
+            color:
+                #4338ca;
+
+            background:
+                #eef2ff;
+        }
+
+
+        .team-icon {
+
+            color:
+                #047857;
+
+            background:
+                #ecfdf5;
+        }
+
+
+        .task-icon {
+
+            color:
+                #c2410c;
+
+            background:
+                #fff7ed;
+        }
+
+
+        .management-tag {
+
+            padding:
+                5px 7px;
+
+            border-radius:
+                6px;
+
+            font-size:
+                7px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.5px;
+
+            background:
+                #f8fafc;
+
+            color:
+                #64748b;
+        }
+
+
+        .management-card h3 {
+
+            margin:
+                0 0 7px;
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+        }
+
+
+        .management-card p {
+
+            min-height:
+                49px;
+
+            margin:
+                0 0 17px;
+
+            color:
+                #64748b;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.65;
+        }
+
+
+        .management-actions {
+
+            display:
+                flex;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .management-btn {
+
+            min-height:
+                32px;
+
+            padding:
+                0 10px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                8px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+
+        .management-btn:hover {
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .management-btn-primary {
+
+            color:
+                white;
+
+            background:
+                #4f46e5;
+        }
+
+
+        .management-btn-secondary {
+
+            color:
+                #475569;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid
+                #e9eef4;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-top:
+                14px;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(255,255,255,0.86);
+        }
+
+
+        .footer-text {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            gap:
+                14px;
+        }
+
+
+        .footer-links a {
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .footer-links a:hover {
+
+            color:
+                #4338ca;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        .mobile-menu-btn {
+
+            display:
+                none;
+
+            border:
+                none;
+
+            background:
+                #f8fafc;
+
+            border-radius:
+                8px;
+
+            width:
+                34px;
+
+            height:
+                34px;
+        }
+
+
+        @media (max-width: 1100px) {
+
+            .sidebar {
+                width:
+                    220px;
+            }
+
+            .main {
+                width:
+                    calc(100% - 220px);
+
+                margin-left:
+                    220px;
+            }
+
+            .hero-side {
+                display:
+                    none;
+            }
+
+            .workspace {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width:
+                    72px;
+            }
+
+            .brand-copy,
+            .sidebar-section,
+            .nav-item span:not(.nav-icon),
+            .sidebar-user > div:not(.sidebar-avatar) {
+                display:
+                    none;
+            }
+
+            .sidebar-brand {
+                justify-content:
+                    center;
+
+                padding:
+                    0;
+            }
+
+            .nav-list {
+                padding:
+                    0 9px;
+            }
+
+            .nav-item {
+                justify-content:
+                    center;
+
+                padding:
+                    10px;
+            }
+
+            .main {
+                width:
+                    calc(100% - 72px);
+
+                margin-left:
+                    72px;
+            }
+
+            .kpi-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .management {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                height:
+                    65px;
+
+                padding:
+                    0 14px;
+            }
+
+            .topbar-left h1 {
+                font-size:
+                    15px;
+            }
+
+            .topbar-left p {
+                display:
+                    none;
+            }
+
+            .content {
+                padding:
+                    14px;
+            }
+
+            .hero {
+                min-height:
+                    auto;
+
+                padding:
+                    23px;
+
+                border-radius:
+                    15px;
+            }
+
+            .hero-title {
+                font-size:
+                    27px;
+            }
+
+            .hero-actions {
+                flex-wrap:
+                    wrap;
+            }
+
+            .kpi-grid {
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap:
+                    9px;
+            }
+
+            .kpi {
+                padding:
+                    15px;
+            }
+
+            .kpi-value {
+                font-size:
+                    23px;
+            }
+
+            .progress-content {
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+            .progress-circle {
+                margin:
+                    0 auto;
+            }
+
+            .footer {
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+            .footer-links {
+                flex-wrap:
+                    wrap;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                T
+            </div>
+
+            <div class="brand-copy">
+
+                <div class="brand-title">
+                    Team Task Manager
+                </div>
+
+                <div class="brand-subtitle">
+                    Admin Console
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            Workspace
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'accounts:admin_dashboard' %}"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'projects:project_list' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    □
+                </span>
+
+                <span>
+                    Projects
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_list' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                <span>
+                    Tasks
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:team_members' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    ◎
+                </span>
+
+                <span>
+                    Team Members
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            Create
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'projects:project_create' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Project
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_create' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Task
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:add_team_member' %}"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    Add Member
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="sidebar-footer">
+
+
+            <div class="sidebar-user">
+
+
+                <div class="sidebar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <div class="sidebar-user-name">
+
+                        {{ request.user.username }}
+
+                    </div>
+
+                    <div class="sidebar-user-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <section class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Monitor your team's work from one place.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <div class="status-pill">
+
+                    <span class="status-dot"></span>
+
+                    All systems operational
+
+                </div>
+
+
+                <div class="topbar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'accounts:logout' %}"
+                    class="btn btn-sm btn-outline-dark"
+                >
+                    Logout
+                </a>
+
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="hero">
+
+
+                <div class="hero-content">
+
+
+                    <div class="hero-eyebrow">
+
+                        <span class="hero-eyebrow-dot"></span>
+
+                        ADMIN WORKSPACE
+
+                    </div>
+
+
+                    <h2 class="hero-title">
+
+                        Welcome back,
+                        <span>
+                            {{ request.user.username }}
+                        </span>
+
+                    </h2>
+
+
+                    <p class="hero-description">
+
+                        Manage projects, assign work, monitor progress
+                        and keep your team aligned with clear deadlines
+                        and priorities.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+
+                        <a
+                            href="{% url 'projects:project_create' %}"
+                            class="hero-btn hero-btn-primary"
+                        >
+                            + Create Project
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:task_create' %}"
+                            class="hero-btn hero-btn-secondary"
+                        >
+                            + Create Task
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="hero-side">
+
+                    <div class="hero-orbit"></div>
+
+                    <div class="hero-center">
+                        ✦
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 KPI
+            ================================================== -->
+
+            <section class="kpi-grid">
+
+
+                <div class="kpi kpi-primary">
+
+                    <div class="kpi-top">
+
+                        <span class="kpi-label">
+                            Total Projects
+                        </span>
+
+                        <span class="kpi-icon">
+                            □
+                        </span>
+
+                    </div>
+
+                    <div class="kpi-value">
+                        {{ total_projects }}
+                    </div>
+
+                    <div class="kpi-note">
+                        Active project workspaces
+                    </div>
+
+                </div>
+
+
+                <div class="kpi kpi-primary">
+
+                    <div class="kpi-top">
+
+                        <span class="kpi-label">
+                            Total Tasks
+                        </span>
+
+                        <span class="kpi-icon">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="kpi-value">
+                        {{ total_tasks }}
+                    </div>
+
+                    <div class="kpi-note">
+                        Tasks across all projects
+                    </div>
+
+                </div>
+
+
+                <div class="kpi kpi-success">
+
+                    <div class="kpi-top">
+
+                        <span class="kpi-label">
+                            Completed
+                        </span>
+
+                        <span class="kpi-icon">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <div class="kpi-value text-success">
+                        {{ completed_tasks }}
+                    </div>
+
+                    <div class="kpi-note">
+                        Successfully completed
+                    </div>
+
+                </div>
+
+
+                <div class="kpi kpi-warning">
+
+                    <div class="kpi-top">
+
+                        <span class="kpi-label">
+                            Pending
+                        </span>
+
+                        <span class="kpi-icon">
+                            ◷
+                        </span>
+
+                    </div>
+
+                    <div class="kpi-value text-warning">
+                        {{ pending_tasks }}
+                    </div>
+
+                    <div class="kpi-note">
+                        Tasks requiring attention
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 WORKSPACE
+            ================================================== -->
+
+            <section class="workspace">
+
+
+                <!-- PROJECT PROGRESS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-head">
+
+
+                        <div>
+
+                            <h3 class="panel-title">
+                                Overall Project Progress
+                            </h3>
+
+                            <p class="panel-subtitle">
+                                Calculated from completed tasks
+                            </p>
+
+                        </div>
+
+
+                        <span class="panel-action">
+                            Live
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="progress-content">
+
+
+                        <div
+                            class="progress-circle"
+                            style="--progress: {{ overall_progress }};"
+                        >
+
+                            <div class="progress-inner">
+
+                                <div class="progress-value">
+                                    {{ overall_progress }}%
+                                </div>
+
+                                <div class="progress-label">
+                                    Complete
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="progress-details">
+
+
+                            <div class="detail-row">
+
+                                <div>
+
+                                    <div class="detail-label">
+                                        Completed Tasks
+                                    </div>
+
+                                    <div class="mini-bar">
+
+                                        <span
+                                            style="
+                                                width:
+                                                {{ overall_progress }}%;
+                                            "
+                                        ></span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="detail-value">
+                                    {{ completed_tasks }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="detail-row">
+
+                                <div>
+
+                                    <div class="detail-label">
+                                        Total Tasks
+                                    </div>
+
+                                </div>
+
+                                <div class="detail-value">
+                                    {{ total_tasks }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="detail-row">
+
+                                <div>
+
+                                    <div class="detail-label">
+                                        Pending Tasks
+                                    </div>
+
+                                </div>
+
+                                <div class="detail-value text-warning">
+                                    {{ pending_tasks }}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-head">
+
+
+                        <div>
+
+                            <h3 class="panel-title">
+                                Quick Actions
+                            </h3>
+
+                            <p class="panel-subtitle">
+                                Frequently used actions
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="action-list">
+
+
+                        <a
+                            href="{% url 'projects:project_create' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                +
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    Create Project
+                                </span>
+
+                                <span class="quick-desc">
+                                    Start a new workspace
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'accounts:add_team_member' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                +
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    Add Team Member
+                                </span>
+
+                                <span class="quick-desc">
+                                    Add a member to your team
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:task_create' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                +
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    Create Task
+                                </span>
+
+                                <span class="quick-desc">
+                                    Assign work and deadline
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:task_list' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                ≡
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    View All Tasks
+                                </span>
+
+                                <span class="quick-desc">
+                                    Review and manage tasks
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MANAGEMENT CARDS
+            ================================================== -->
+
+            <section class="management">
+
+
+                <!-- PROJECTS -->
+
+                <article class="management-card">
+
+
+                    <div class="management-top">
+
+                        <div class="management-icon project-icon">
+                            □
+                        </div>
+
+                        <span class="management-tag">
+                            PROJECTS
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Project Management
+                    </h3>
+
+
+                    <p>
+
+                        Create projects, manage schedules,
+                        update project details and monitor
+                        project progress.
+
+                    </p>
+
+
+                    <div class="management-actions">
+
+
+                        <a
+                            href="{% url 'projects:project_list' %}"
+                            class="management-btn management-btn-primary"
+                        >
+                            View Projects
+                        </a>
+
+
+                        <a
+                            href="{% url 'projects:project_create' %}"
+                            class="management-btn management-btn-secondary"
+                        >
+                            + Create
+                        </a>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- TEAM -->
+
+                <article class="management-card">
+
+
+                    <div class="management-top">
+
+                        <div class="management-icon team-icon">
+                            ◎
+                        </div>
+
+                        <span class="management-tag">
+                            TEAM
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Team Members
+                    </h3>
+
+
+                    <p>
+
+                        Manage your team members and give
+                        them access to assigned project work.
+
+                    </p>
+
+
+                    <div class="management-actions">
+
+
+                        <a
+                            href="{% url 'accounts:team_members' %}"
+                            class="management-btn management-btn-primary"
+                        >
+                            View Members
+                        </a>
+
+
+                        <a
+                            href="{% url 'accounts:add_team_member' %}"
+                            class="management-btn management-btn-secondary"
+                        >
+                            + Add
+                        </a>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- TASKS -->
+
+                <article class="management-card">
+
+
+                    <div class="management-top">
+
+                        <div class="management-icon task-icon">
+                            ✓
+                        </div>
+
+                        <span class="management-tag">
+                            TASKS
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Task Management
+                    </h3>
+
+
+                    <p>
+
+                        Assign work, define priorities,
+                        set deadlines and monitor task status.
+
+                    </p>
+
+
+                    <div class="management-actions">
+
+
+                        <a
+                            href="{% url 'tasks:task_list' %}"
+                            class="management-btn management-btn-primary"
+                        >
+                            View Tasks
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:task_create' %}"
+                            class="management-btn management-btn-secondary"
+                        >
+                            + Create
+                        </a>
+
+
+                    </div>
+
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="footer">
+
+
+                <div class="footer-text">
+
+                    Team Task Manager · Admin Console
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a
+                        href="{% url 'projects:project_list' %}"
+                    >
+                        Projects
+                    </a>
+
+                    <a
+                        href="{% url 'tasks:task_list' %}"
+                    >
+                        Tasks
+                    </a>
+
+                    <a
+                        href="{% url 'accounts:team_members' %}"
+                    >
+                        Team
+                    </a>
+
+                </div>
+
+
+            </footer>
+
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<script>
+
+    /*
+     * Small counter animation for KPI numbers.
+     * It only runs on elements containing plain numeric text.
+     */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const counters =
+                document.querySelectorAll(
+                    ".kpi-value"
+                );
+
+
+            counters.forEach(
+                function (counter) {
+
+                    const value =
+                        parseInt(
+                            counter.textContent.trim()
+                        );
+
+
+                    if (
+                        Number.isNaN(value) ||
+                        value <= 0
+                    ) {
+                        return;
+                    }
+
+
+                    counter.textContent = "0";
+
+
+                    let current = 0;
+
+                    const duration = 700;
+
+                    const start =
+                        performance.now();
+
+
+                    function update(now) {
+
+                        const progress =
+                            Math.min(
+                                (now - start) /
+                                duration,
+                                1
+                            );
+
+
+                        current =
+                            Math.floor(
+                                value * progress
+                            );
+
+
+                        counter.textContent =
+                            current;
+
+
+                        if (progress < 1) {
+
+                            requestAnimationFrame(
+                                update
+                            );
+
+                        } else {
+
+                            counter.textContent =
+                                value;
+
+                        }
+
+                    }
+
+
+                    requestAnimationFrame(
+                        update
+                    );
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+

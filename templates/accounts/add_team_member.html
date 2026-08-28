@@ -1,0 +1,2568 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Add Team Member | Team Task Manager
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+
+            --sidebar: #0b1220;
+            --sidebar-2: #111a2b;
+
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-soft: #eef2ff;
+
+            --text: #0f172a;
+            --muted: #64748b;
+            --light-muted: #94a3b8;
+
+            --border: #e5eaf0;
+            --surface: #ffffff;
+            --page: #f7f8fc;
+
+            --success: #16a34a;
+            --success-soft: #ecfdf3;
+
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           APP
+        ====================================================== */
+
+        .app {
+
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 245px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--sidebar),
+                    #09101d
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            color:
+                #cbd5e1;
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .sidebar-brand {
+
+            min-height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                0 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .brand-mark {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #3b82f6
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px
+                rgba(59,130,246,0.20);
+        }
+
+
+        .brand-name {
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 3px;
+
+            color:
+                #64748b;
+
+            font-size: 9px;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                21px 14px 7px;
+
+            color:
+                #64748b;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing:
+                0.8px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .nav-list {
+
+            padding:
+                0 10px;
+        }
+
+
+        .nav-link {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                11px 12px;
+
+            margin-bottom:
+                4px;
+
+            border-radius:
+                10px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                11px;
+
+            font-weight:
+                500;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .nav-link:hover {
+
+            color: white;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .nav-link.active {
+
+            color: white;
+
+            background:
+                rgba(99,102,241,0.16);
+
+            box-shadow:
+                inset 3px 0 0
+                #6366f1;
+        }
+
+
+        .nav-icon {
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            font-size: 13px;
+        }
+
+
+        .sidebar-spacer {
+            flex: 1;
+        }
+
+
+        .sidebar-footer {
+
+            padding: 14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .sidebar-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                10px;
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.035);
+        }
+
+
+        .sidebar-avatar {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #2563eb
+                );
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        .sidebar-user-name {
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .sidebar-user-role {
+
+            color: #64748b;
+
+            font-size: 9px;
+
+            margin-top: 2px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            width:
+                calc(100% - 245px);
+
+            margin-left:
+                245px;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .topbar {
+
+            height: 74px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 28px;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            backdrop-filter:
+                blur(16px);
+
+            -webkit-backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .topbar-title {
+
+            margin: 0;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -0.4px;
+        }
+
+
+        .topbar-subtitle {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        .topbar-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .system-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px 10px;
+
+            border-radius:
+                9px;
+
+            background:
+                #f4fbf6;
+
+            border:
+                1px solid
+                #dcefe3;
+
+            color:
+                #15803d;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .status-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+
+            box-shadow:
+                0 0 8px
+                rgba(34,197,94,0.40);
+
+            animation:
+                pulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.15);
+            }
+        }
+
+
+        .topbar-avatar {
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           PAGE CONTENT
+        ====================================================== */
+
+        .content {
+
+            max-width:
+                1100px;
+
+            margin:
+                0 auto;
+
+            padding:
+                30px 28px 55px;
+        }
+
+
+        /* =====================================================
+           BREADCRUMB
+        ====================================================== */
+
+        .breadcrumb-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom:
+                15px;
+
+            color:
+                var(--light-muted);
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .breadcrumb-row a {
+
+            color:
+                #64748b;
+        }
+
+
+        .breadcrumb-row a:hover {
+
+            color:
+                var(--primary);
+        }
+
+
+        .breadcrumb-current {
+
+            color:
+                #0f172a;
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ====================================================== */
+
+        .page-header {
+
+            margin-bottom:
+                22px;
+        }
+
+
+        .page-header h1 {
+
+            margin:
+                0 0 8px;
+
+            font-size:
+                30px;
+
+            line-height:
+                1.15;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -1px;
+        }
+
+
+        .page-header p {
+
+            margin: 0;
+
+            max-width:
+                620px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* =====================================================
+           FORM LAYOUT
+        ====================================================== */
+
+        .form-layout {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                0.72fr 1.28fr;
+
+            gap:
+                18px;
+
+            align-items:
+                start;
+        }
+
+
+        /* =====================================================
+           INFO PANEL
+        ====================================================== */
+
+        .info-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                24px;
+
+            border-radius:
+                18px;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #1e293b
+                );
+
+            box-shadow:
+                0 18px 40px
+                rgba(15,23,42,0.10);
+        }
+
+
+        .info-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                230px;
+
+            height:
+                230px;
+
+            border-radius:
+                50%;
+
+            top:
+                -130px;
+
+            right:
+                -90px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            animation:
+                infoRing
+                14s
+                linear
+                infinite;
+        }
+
+
+        @keyframes infoRing {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        .info-icon {
+
+            width:
+                46px;
+
+            height:
+                46px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(99,102,241,0.18);
+
+            border:
+                1px solid
+                rgba(129,140,248,0.18);
+
+            font-size:
+                18px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .info-card h2 {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin:
+                0 0 9px;
+
+            font-size:
+                19px;
+
+            line-height:
+                1.3;
+
+            font-weight:
+                800;
+        }
+
+
+        .info-card > p {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin:
+                0;
+
+            color:
+                rgba(226,232,240,0.68);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .info-list {
+
+            margin-top:
+                23px;
+        }
+
+
+        .info-item {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                13px;
+
+            color:
+                rgba(255,255,255,0.76);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .info-check {
+
+            width:
+                19px;
+
+            height:
+                19px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color:
+                #a5b4fc;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+        }
+
+
+        .security-note {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-top:
+                25px;
+
+            padding:
+                10px;
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        /* =====================================================
+           FORM CARD
+        ====================================================== */
+
+        .form-card {
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                18px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(15,23,42,0.05);
+
+            animation:
+                formAppear
+                0.65s
+                ease both;
+        }
+
+
+        @keyframes formAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(13px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        .form-header {
+
+            padding:
+                21px 22px;
+
+            border-bottom:
+                1px solid
+                #eef1f4;
+        }
+
+
+        .form-header-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+        }
+
+
+        .form-heading {
+
+            margin:
+                0;
+
+            font-size:
+                16px;
+
+            font-weight:
+                800;
+        }
+
+
+        .required-note {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .form-body {
+
+            padding:
+                22px;
+        }
+
+
+        /* =====================================================
+           FORM GROUP
+        ====================================================== */
+
+        .form-group {
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .form-label-custom {
+
+            display:
+                block;
+
+            margin-bottom:
+                7px;
+
+            color:
+                #334155;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+        }
+
+
+        .field-hint {
+
+            margin-top:
+                5px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        /* =====================================================
+           INPUT WRAPPER
+        ====================================================== */
+
+        .input-wrap {
+
+            position:
+                relative;
+        }
+
+
+        .field-icon {
+
+            position:
+                absolute;
+
+            left:
+                14px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                #94a3b8;
+
+            font-size:
+                12px;
+
+            pointer-events:
+                none;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .form-control-custom {
+
+            width:
+                100%;
+
+            height:
+                48px;
+
+            padding:
+                0 13px 0 39px;
+
+            border:
+                1px solid
+                #e2e8f0;
+
+            border-radius:
+                10px;
+
+            background:
+                #ffffff;
+
+            color:
+                #0f172a;
+
+            font-size:
+                11px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .form-control-custom::placeholder {
+
+            color:
+                #b0b8c3;
+        }
+
+
+        .form-control-custom:focus {
+
+            outline:
+                none;
+
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(79,70,229,0.08);
+        }
+
+
+        .input-wrap:focus-within
+        .field-icon {
+
+            color:
+                var(--primary);
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        .password-wrap {
+
+            position:
+                relative;
+        }
+
+
+        .password-toggle {
+
+            position:
+                absolute;
+
+            right:
+                11px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #64748b;
+
+            cursor:
+                pointer;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            padding:
+                4px;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .password-toggle:hover {
+
+            color:
+                var(--primary);
+        }
+
+
+        .password-input {
+
+            padding-right:
+                55px;
+        }
+
+
+        /* =====================================================
+           FIELD ERROR
+        ====================================================== */
+
+        .field-error {
+
+            margin-top:
+                5px;
+
+            color:
+                var(--danger);
+
+            font-size:
+                8px;
+        }
+
+
+        /* =====================================================
+           FORM FOOTER
+        ====================================================== */
+
+        .form-footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            margin-top:
+                22px;
+
+            padding-top:
+                18px;
+
+            border-top:
+                1px solid
+                #eef1f4;
+        }
+
+
+        .cancel-btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-height:
+                40px;
+
+            padding:
+                0 14px;
+
+            border-radius:
+                9px;
+
+            color:
+                #475569;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid
+                #e8edf2;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .cancel-btn:hover {
+
+            color:
+                #1e293b;
+
+            transform:
+                translateY(-1px);
+
+            border-color:
+                #cbd5e1;
+        }
+
+
+        .submit-btn {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            min-height:
+                40px;
+
+            padding:
+                0 17px;
+
+            border:
+                none;
+
+            border-radius:
+                9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #2563eb
+                );
+
+            color:
+                white;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+            box-shadow:
+                0 9px 20px
+                rgba(79,70,229,0.18);
+
+            cursor:
+                pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .submit-btn::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                -120%;
+
+            width:
+                70%;
+
+            height:
+                100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.25),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left 0.7s ease;
+        }
+
+
+        .submit-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 13px 25px
+                rgba(79,70,229,0.24);
+        }
+
+
+        .submit-btn:hover::before {
+
+            left:
+                140%;
+        }
+
+
+        .submit-btn-content {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+        }
+
+
+        /* =====================================================
+           DJANGO NON FIELD ERROR
+        ====================================================== */
+
+        .message-alert {
+
+            margin-bottom:
+                18px;
+
+            padding:
+                11px 12px;
+
+            border-radius:
+                10px;
+
+            color:
+                #991b1b;
+
+            background:
+                var(--danger-soft);
+
+            border:
+                1px solid
+                #fecaca;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1050px) {
+
+            .sidebar {
+                width:
+                    220px;
+            }
+
+
+            .main {
+
+                width:
+                    calc(100% - 220px);
+
+                margin-left:
+                    220px;
+            }
+
+
+            .form-layout {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                width:
+                    72px;
+            }
+
+
+            .brand-name,
+            .brand-subtitle,
+            .sidebar-section,
+            .nav-link span:not(.nav-icon),
+            .sidebar-user > div:not(.sidebar-avatar) {
+
+                display:
+                    none;
+            }
+
+
+            .sidebar-brand {
+
+                justify-content:
+                    center;
+
+                padding:
+                    0;
+            }
+
+
+            .nav-link {
+
+                justify-content:
+                    center;
+
+                padding:
+                    10px;
+            }
+
+
+            .main {
+
+                width:
+                    calc(100% - 72px);
+
+                margin-left:
+                    72px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                height:
+                    65px;
+
+                padding:
+                    0 14px;
+            }
+
+
+            .system-status {
+
+                display:
+                    none;
+            }
+
+
+            .topbar-title {
+                font-size:
+                    15px;
+            }
+
+
+            .topbar-subtitle {
+                display:
+                    none;
+            }
+
+
+            .content {
+
+                padding:
+                    20px 14px 40px;
+            }
+
+
+            .page-header h1 {
+
+                font-size:
+                    25px;
+            }
+
+
+            .info-card {
+
+                padding:
+                    20px;
+            }
+
+
+            .form-body,
+            .form-header {
+
+                padding:
+                    18px;
+            }
+
+
+            .form-footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+
+            .cancel-btn,
+            .submit-btn {
+
+                width:
+                    100%;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                T
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    Team Task Manager
+                </div>
+
+                <div class="brand-subtitle">
+                    Admin Console
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            Workspace
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'accounts:admin_dashboard' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'projects:project_list' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    □
+                </span>
+
+                <span>
+                    Projects
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_list' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                <span>
+                    Tasks
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:team_members' %}"
+                class="nav-link active"
+            >
+
+                <span class="nav-icon">
+                    ◎
+                </span>
+
+                <span>
+                    Team Members
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            Create
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'projects:project_create' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Project
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:task_create' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    New Task
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'accounts:add_team_member' %}"
+                class="nav-link active"
+            >
+
+                <span class="nav-icon">
+                    +
+                </span>
+
+                <span>
+                    Add Member
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-user">
+
+                <div class="sidebar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <div class="sidebar-user-name">
+
+                        {{ request.user.username }}
+
+                    </div>
+
+                    <div class="sidebar-user-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1 class="topbar-title">
+                    Team Members
+                </h1>
+
+                <p class="topbar-subtitle">
+                    Manage access to your team workspace.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <div class="system-status">
+
+                    <span class="status-dot"></span>
+
+                    All systems operational
+
+                </div>
+
+
+                <div class="topbar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'accounts:logout' %}"
+                    class="btn btn-sm btn-outline-dark"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- Breadcrumb -->
+
+            <div class="breadcrumb-row">
+
+                <a
+                    href="{% url 'accounts:admin_dashboard' %}"
+                >
+                    Dashboard
+                </a>
+
+                <span>
+                    /
+                </span>
+
+                <a
+                    href="{% url 'accounts:team_members' %}"
+                >
+                    Team Members
+                </a>
+
+                <span>
+                    /
+                </span>
+
+                <span class="breadcrumb-current">
+                    Add Member
+                </span>
+
+            </div>
+
+
+
+            <!-- Page Header -->
+
+            <div class="page-header">
+
+                <h1>
+                    Add Team Member
+                </h1>
+
+                <p>
+                    Create a team member account and give them
+                    access to assigned projects and tasks.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORM LAYOUT
+            ================================================== -->
+
+            <div class="form-layout">
+
+
+                <!-- =================================================
+                     INFO PANEL
+                ================================================== -->
+
+                <section class="info-card">
+
+
+                    <div class="info-icon">
+                        ◎
+                    </div>
+
+
+                    <h2>
+                        Team access
+                    </h2>
+
+
+                    <p>
+
+                        New members can sign in using their
+                        account credentials and work on tasks
+                        assigned by an administrator.
+
+                    </p>
+
+
+                    <div class="info-list">
+
+
+                        <div class="info-item">
+
+                            <span class="info-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                Secure authenticated access
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <span class="info-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                Role-based team permissions
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <span class="info-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                Access to assigned tasks
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-item">
+
+                            <span class="info-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                Progress and status updates
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="security-note">
+
+                        🔐
+
+                        Account credentials are securely
+                        handled by Django authentication.
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     FORM
+                ================================================== -->
+
+                <section class="form-card">
+
+
+                    <div class="form-header">
+
+
+                        <div class="form-header-top">
+
+                            <h2 class="form-heading">
+                                Member Details
+                            </h2>
+
+                            <span class="required-note">
+                                All fields are required
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-body">
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="message-alert">
+
+                                {{ form.non_field_errors }}
+
+                            </div>
+
+                        {% endif %}
+
+
+
+                        <form
+                            method="POST"
+                            novalidate
+                        >
+
+                            {% csrf_token %}
+
+
+
+                            <!-- USERNAME -->
+
+                            <div class="form-group">
+
+
+                                <label
+                                    for="id_username"
+                                    class="form-label-custom"
+                                >
+                                    Username
+                                </label>
+
+
+                                <div class="input-wrap">
+
+
+                                    <span class="field-icon">
+                                        👤
+                                    </span>
+
+
+                                    {{ form.username }}
+
+
+                                </div>
+
+
+                                {% if form.username.errors %}
+
+                                    {% for error in form.username.errors %}
+
+                                        <div class="field-error">
+                                            {{ error }}
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <div class="field-hint">
+                                        Use a unique username for this member.
+                                    </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+
+                            <!-- EMAIL -->
+
+                            <div class="form-group">
+
+
+                                <label
+                                    for="id_email"
+                                    class="form-label-custom"
+                                >
+                                    Email Address
+                                </label>
+
+
+                                <div class="input-wrap">
+
+
+                                    <span class="field-icon">
+                                        @
+                                    </span>
+
+
+                                    {{ form.email }}
+
+
+                                </div>
+
+
+                                {% if form.email.errors %}
+
+                                    {% for error in form.email.errors %}
+
+                                        <div class="field-error">
+                                            {{ error }}
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <div class="field-hint">
+                                        Use a valid work or personal email address.
+                                    </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+
+                            <!-- PASSWORD -->
+
+                            <div class="form-group">
+
+
+                                <label
+                                    for="id_password"
+                                    class="form-label-custom"
+                                >
+                                    Password
+                                </label>
+
+
+                                <div class="input-wrap password-wrap">
+
+
+                                    <span class="field-icon">
+                                        🔒
+                                    </span>
+
+
+                                    {{ form.password }}
+
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword()"
+                                        id="passwordToggle"
+                                    >
+                                        Show
+                                    </button>
+
+
+                                </div>
+
+
+                                {% if form.password.errors %}
+
+                                    {% for error in form.password.errors %}
+
+                                        <div class="field-error">
+                                            {{ error }}
+                                        </div>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <div class="field-hint">
+                                        Choose a strong password that the member can use to sign in.
+                                    </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+
+                            <!-- FOOTER -->
+
+                            <div class="form-footer">
+
+
+                                <a
+                                    href="{% url 'accounts:team_members' %}"
+                                    class="cancel-btn"
+                                >
+                                    Cancel
+                                </a>
+
+
+                                <button
+                                    type="submit"
+                                    class="submit-btn"
+                                >
+
+                                    <span class="submit-btn-content">
+
+                                        Create Team Member
+                                        →
+
+                                    </span>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     PASSWORD TOGGLE
+========================================================= -->
+
+<script>
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("id_password");
+
+        const button =
+            document.getElementById("passwordToggle");
+
+
+        if (!password) {
+            return;
+        }
+
+
+        if (
+            password.type === "password"
+        ) {
+
+            password.type = "text";
+
+            button.textContent =
+                "Hide";
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent =
+                "Show";
+        }
+
+    }
+
+
+    /*
+     * Add Bootstrap-like classes to Django widgets
+     * without changing forms.py.
+     */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const username =
+                document.getElementById("id_username");
+
+            const email =
+                document.getElementById("id_email");
+
+            const password =
+                document.getElementById("id_password");
+
+
+            [
+                username,
+                email,
+                password
+            ].forEach(
+                function (field) {
+
+                    if (!field) {
+                        return;
+                    }
+
+                    field.classList.add(
+                        "form-control-custom"
+                    );
+
+                }
+            );
+
+
+            if (username) {
+
+                username.setAttribute(
+                    "placeholder",
+                    "Enter username"
+                );
+
+                username.setAttribute(
+                    "autocomplete",
+                    "username"
+                );
+
+            }
+
+
+            if (email) {
+
+                email.setAttribute(
+                    "placeholder",
+                    "Enter email address"
+                );
+
+                email.setAttribute(
+                    "autocomplete",
+                    "email"
+                );
+
+            }
+
+
+            if (password) {
+
+                password.setAttribute(
+                    "placeholder",
+                    "Enter password"
+                );
+
+                password.setAttribute(
+                    "autocomplete",
+                    "new-password"
+                );
+
+                password.classList.add(
+                    "password-input"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+

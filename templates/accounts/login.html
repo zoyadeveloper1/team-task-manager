@@ -1,0 +1,2175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Sign In | Team Task Manager
+    </title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ====================================================== */
+
+        :root {
+            --bg: #070b14;
+            --bg-2: #0b1120;
+            --surface: rgba(255,255,255,0.07);
+            --surface-border: rgba(255,255,255,0.10);
+
+            --text: #f8fafc;
+            --muted: #94a3b8;
+
+            --primary: #6366f1;
+            --primary-2: #3b82f6;
+            --cyan: #22d3ee;
+
+            --panel: #ffffff;
+            --panel-text: #0f172a;
+            --panel-muted: #64748b;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --danger: #dc2626;
+        }
+
+
+        /* =====================================================
+           RESET
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(99,102,241,0.18),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(34,211,238,0.12),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    145deg,
+                    #020617,
+                    #0b1120 45%,
+                    #08101d
+                );
+
+            color: var(--text);
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           MAIN PAGE
+        ====================================================== */
+
+        .login-page {
+
+            position: relative;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           BACKGROUND GRID
+        ====================================================== */
+
+        .grid {
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,0.03) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.03) 1px,
+                    transparent 1px
+                );
+
+            background-size: 52px 52px;
+
+            mask-image:
+                radial-gradient(
+                    circle at center,
+                    black 10%,
+                    transparent 80%
+                );
+
+            opacity: 0.45;
+
+            animation:
+                gridMove 18s linear infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes gridMove {
+
+            from {
+                transform: translate(0,0);
+            }
+
+            to {
+                transform: translate(52px,52px);
+            }
+
+        }
+
+
+        /* =====================================================
+           GLOW ORBS
+        ====================================================== */
+
+        .glow {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(40px);
+        }
+
+
+        .glow-one {
+
+            width: 380px;
+            height: 380px;
+
+            top: -150px;
+            left: -120px;
+
+            background:
+                rgba(79,70,229,0.17);
+
+            animation:
+                glowOne 9s ease-in-out infinite;
+        }
+
+
+        .glow-two {
+
+            width: 460px;
+            height: 460px;
+
+            right: -180px;
+            bottom: -170px;
+
+            background:
+                rgba(8,145,178,0.13);
+
+            animation:
+                glowTwo 11s ease-in-out infinite;
+        }
+
+
+        .glow-three {
+
+            width: 180px;
+            height: 180px;
+
+            top: 20%;
+            right: 20%;
+
+            background:
+                rgba(168,85,247,0.10);
+
+            animation:
+                glowThree 7s ease-in-out infinite;
+        }
+
+
+        @keyframes glowOne {
+
+            0%,
+            100% {
+                transform:
+                    translate(0,0)
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    translate(50px,35px)
+                    scale(1.08);
+            }
+
+        }
+
+
+        @keyframes glowTwo {
+
+            0%,
+            100% {
+                transform:
+                    translate(0,0);
+            }
+
+            50% {
+                transform:
+                    translate(-40px,-35px);
+            }
+
+        }
+
+
+        @keyframes glowThree {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-25px);
+            }
+
+        }
+
+
+        /* =====================================================
+           FLOATING PARTICLES
+        ====================================================== */
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.7);
+
+            box-shadow:
+                0 0 14px
+                rgba(255,255,255,0.5);
+
+            animation:
+                particleFloat 4s ease-in-out infinite;
+
+            pointer-events: none;
+        }
+
+
+        .p1 {
+            top: 18%;
+            left: 14%;
+        }
+
+        .p2 {
+            top: 24%;
+            right: 18%;
+            animation-delay: 1s;
+        }
+
+        .p3 {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .p4 {
+            bottom: 14%;
+            right: 12%;
+            animation-delay: 3s;
+        }
+
+        .p5 {
+            top: 12%;
+            left: 48%;
+            animation-delay: 1.5s;
+        }
+
+
+        @keyframes particleFloat {
+
+            0%,
+            100% {
+                opacity: 0.15;
+                transform:
+                    translateY(0)
+                    scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform:
+                    translateY(-18px)
+                    scale(1.4);
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGIN SHELL
+        ====================================================== */
+
+        .login-shell {
+
+            position: relative;
+
+            z-index: 10;
+
+            width: 100%;
+            max-width: 1180px;
+
+            min-height: 680px;
+
+            display: grid;
+
+            grid-template-columns: 1.08fr 0.92fr;
+
+            overflow: hidden;
+
+            border-radius: 32px;
+
+            border:
+                1px solid
+                var(--surface-border);
+
+            background:
+                rgba(255,255,255,0.055);
+
+            backdrop-filter:
+                blur(30px);
+
+            -webkit-backdrop-filter:
+                blur(30px);
+
+            box-shadow:
+
+                0 45px 120px
+                rgba(0,0,0,0.50),
+
+                inset 0 1px 0
+                rgba(255,255,255,0.08);
+
+            animation:
+                shellEnter 0.95s
+                cubic-bezier(0.16,1,0.3,1)
+                both;
+        }
+
+
+        @keyframes shellEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.96);
+
+                filter:
+                    blur(10px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                filter:
+                    blur(0);
+            }
+
+        }
+
+
+        .login-shell::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(255,255,255,0.07),
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(255,255,255,0.03)
+                );
+        }
+
+
+        /* =====================================================
+           LEFT ENTERPRISE BRAND PANEL
+        ====================================================== */
+
+        .brand-panel {
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            padding: 68px;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #172554 52%,
+                    #0c4a6e
+                );
+
+            color: white;
+        }
+
+
+        .brand-panel::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 580px;
+            height: 580px;
+
+            right: -260px;
+            top: -240px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            box-shadow:
+                0 0 100px
+                rgba(96,165,250,0.12);
+
+            animation:
+                rotateRing 18s linear infinite;
+        }
+
+
+        .brand-panel::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 380px;
+            height: 380px;
+
+            left: -220px;
+            bottom: -220px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(125,211,252,0.08);
+
+            animation:
+                rotateRingReverse 14s linear infinite;
+        }
+
+
+        @keyframes rotateRing {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        @keyframes rotateRingReverse {
+
+            from {
+                transform:
+                    rotate(360deg);
+            }
+
+            to {
+                transform:
+                    rotate(0deg);
+            }
+
+        }
+
+
+        .brand-content {
+
+            position: relative;
+
+            z-index: 3;
+
+            max-width: 550px;
+
+            animation:
+                brandReveal 1s
+                0.12s
+                cubic-bezier(0.16,1,0.3,1)
+                both;
+        }
+
+
+        @keyframes brandReveal {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(-30px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           COMPANY BADGE
+        ====================================================== */
+
+        .workspace-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px 12px;
+
+            margin-bottom: 22px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.11);
+
+            color:
+                rgba(255,255,255,0.80);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                0.8px;
+        }
+
+
+        .workspace-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                #67e8f9;
+
+            box-shadow:
+                0 0 12px
+                rgba(103,232,249,0.8);
+
+            animation:
+                pulse 1.8s ease-in-out infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+
+                opacity: 0.45;
+
+                transform:
+                    scale(0.8);
+            }
+
+            50% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1.2);
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGO
+        ====================================================== */
+
+        .logo {
+
+            width: 78px;
+            height: 78px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.14),
+                    rgba(255,255,255,0.03)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.16);
+
+            box-shadow:
+
+                0 24px 55px
+                rgba(0,0,0,0.20),
+
+                inset 0 1px 0
+                rgba(255,255,255,0.10);
+
+            margin-bottom: 30px;
+
+            animation:
+                logoFloat 4s ease-in-out infinite;
+        }
+
+
+        .logo::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 94px;
+            height: 94px;
+
+            border-radius: 26px;
+
+            border:
+                1px solid
+                rgba(96,165,250,0.12);
+
+            animation:
+                logoPulse 2.8s ease-in-out infinite;
+        }
+
+
+        .logo-mark {
+
+            position: relative;
+
+            font-size: 32px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                -2px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #bfdbfe,
+                    #67e8f9
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-7px);
+            }
+
+        }
+
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+
+                opacity: 0.28;
+
+                transform:
+                    scale(1);
+            }
+
+            50% {
+
+                opacity: 0;
+
+                transform:
+                    scale(1.12);
+            }
+
+        }
+
+
+        /* =====================================================
+           BRAND TITLE
+        ====================================================== */
+
+        .brand-title {
+
+            margin: 0 0 18px;
+
+            font-size:
+                clamp(40px,4vw,58px);
+
+            line-height:
+                1.02;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -2.6px;
+        }
+
+
+        .brand-title span {
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #93c5fd,
+                    #a5b4fc,
+                    #67e8f9
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .brand-description {
+
+            max-width: 500px;
+
+            color:
+                rgba(226,232,240,0.70);
+
+            font-size: 14px;
+
+            line-height: 1.85;
+
+            margin-bottom: 32px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ====================================================== */
+
+        .feature-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0,1fr));
+
+            gap: 10px;
+
+            max-width: 470px;
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                11px 13px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            color:
+                rgba(255,255,255,0.82);
+
+            font-size: 10px;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+
+        .feature:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border-color:
+                rgba(255,255,255,0.14);
+        }
+
+
+        .feature-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                #60a5fa;
+
+            box-shadow:
+                0 0 10px
+                rgba(96,165,250,0.65);
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           RIGHT LOGIN PANEL
+        ====================================================== */
+
+        .form-panel {
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 68px;
+
+            background:
+                rgba(255,255,255,0.985);
+        }
+
+
+        .form-content {
+
+            width: 100%;
+
+            max-width: 410px;
+
+            margin:
+                0 auto;
+
+            animation:
+                formReveal 1s
+                0.28s
+                cubic-bezier(0.16,1,0.3,1)
+                both;
+        }
+
+
+        @keyframes formReveal {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(30px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGIN HEADER
+        ====================================================== */
+
+        .secure-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px 12px;
+
+            margin-bottom: 20px;
+
+            border-radius: 50px;
+
+            color:
+                #4f46e5;
+
+            background:
+                rgba(79,70,229,0.07);
+
+            border:
+                1px solid
+                rgba(79,70,229,0.11);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                0.5px;
+
+            animation:
+                badgePulse 2.6s
+                ease-in-out infinite;
+        }
+
+
+        .secure-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                #4f46e5;
+
+            box-shadow:
+                0 0 10px
+                rgba(79,70,229,0.6);
+        }
+
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+
+                box-shadow:
+                    0 0 0 0
+                    rgba(79,70,229,0);
+            }
+
+            50% {
+
+                box-shadow:
+                    0 0 0 7px
+                    rgba(79,70,229,0.05);
+            }
+
+        }
+
+
+        .form-title {
+
+            margin: 0;
+
+            color:
+                var(--panel-text);
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+            line-height: 1.1;
+
+            letter-spacing:
+                -1.4px;
+        }
+
+
+        .form-subtitle {
+
+            margin:
+                10px 0 30px;
+
+            color:
+                var(--panel-muted);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           ALERT
+        ====================================================== */
+
+        .alert {
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 12px;
+
+            animation:
+                alertIn .4s ease both;
+        }
+
+
+        @keyframes alertIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-8px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           LABEL
+        ====================================================== */
+
+        .form-label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color:
+                #334155;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           INPUT
+        ====================================================== */
+
+        .input-wrap {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                #94a3b8;
+
+            font-size: 14px;
+
+            pointer-events: none;
+
+            transition:
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .form-control-custom {
+
+            width: 100%;
+
+            height: 54px;
+
+            padding:
+                0 15px 0 44px;
+
+            border:
+                1px solid
+                #dfe6ef;
+
+            border-radius:
+                13px;
+
+            background:
+                #ffffff;
+
+            color:
+                #0f172a;
+
+            font-size:
+                13px;
+
+            box-shadow:
+                0 5px 18px
+                rgba(15,23,42,0.025);
+
+            transition:
+                border-color 0.22s ease,
+                box-shadow 0.22s ease,
+                transform 0.22s ease;
+        }
+
+
+        .form-control-custom::placeholder {
+
+            color:
+                #a8b0bb;
+        }
+
+
+        .form-control-custom:focus {
+
+            outline:
+                none;
+
+            border-color:
+                #6366f1;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+
+                0 0 0 4px
+                rgba(99,102,241,0.08),
+
+                0 14px 28px
+                rgba(37,99,235,0.08);
+        }
+
+
+        .input-wrap:focus-within
+        .input-icon {
+
+            color:
+                #6366f1;
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ====================================================== */
+
+        .password-input {
+
+            padding-right:
+                70px;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background:
+                transparent;
+
+            color:
+                #64748b;
+
+            font-size:
+                11px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            padding:
+                5px;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .password-toggle:hover {
+
+            color:
+                #4f46e5;
+        }
+
+
+        /* =====================================================
+           REMEMBER / SUPPORT ROW
+        ====================================================== */
+
+        .support-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color:
+                #64748b;
+
+            font-size:
+                11px;
+        }
+
+
+        .remember input {
+
+            width: 14px;
+
+            height: 14px;
+
+            accent-color:
+                #4f46e5;
+        }
+
+
+        .workspace-label {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                10px;
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ====================================================== */
+
+        .login-btn {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 55px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            background:
+
+                linear-gradient(
+                    110deg,
+                    #4338ca,
+                    #4f46e5,
+                    #2563eb,
+                    #0891b2,
+                    #4338ca
+                );
+
+            background-size:
+                320% 100%;
+
+            box-shadow:
+
+                0 15px 30px
+                rgba(37,99,235,0.20);
+
+            cursor: pointer;
+
+            animation:
+                buttonFlow 6s linear infinite;
+
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease;
+        }
+
+
+        @keyframes buttonFlow {
+
+            0% {
+                background-position:
+                    0% 50%;
+            }
+
+            50% {
+                background-position:
+                    100% 50%;
+            }
+
+            100% {
+                background-position:
+                    0% 50%;
+            }
+
+        }
+
+
+        .login-btn::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -130%;
+
+            width: 75%;
+
+            height: 100%;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.28),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left 0.75s ease;
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+
+                0 22px 38px
+                rgba(37,99,235,0.28);
+        }
+
+
+        .login-btn:hover::before {
+
+            left:
+                140%;
+        }
+
+
+        .login-btn:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        .login-inner {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+
+        .arrow {
+
+            transition:
+                transform 0.22s ease;
+        }
+
+
+        .login-btn:hover .arrow {
+
+            transform:
+                translateX(5px);
+        }
+
+
+        /* =====================================================
+           SECURITY NOTE
+        ====================================================== */
+
+        .security {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 19px;
+
+            color:
+                #9ca3af;
+
+            font-size:
+                10px;
+
+            text-align:
+                center;
+        }
+
+
+        .security-lock {
+
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .bottom-note {
+
+            margin-top:
+                22px;
+
+            padding-top:
+                17px;
+
+            border-top:
+                1px solid
+                #edf1f5;
+
+            text-align:
+                center;
+
+            color:
+                #b0b8c2;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                0.45px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 980px) {
+
+            .login-shell {
+
+                max-width:
+                    620px;
+
+                min-height:
+                    auto;
+
+                display:
+                    block;
+            }
+
+
+            .brand-panel {
+
+                display:
+                    none;
+            }
+
+
+            .form-panel {
+
+                min-height:
+                    620px;
+
+                padding:
+                    58px 45px;
+            }
+
+        }
+
+
+        @media (max-width: 560px) {
+
+            .login-page {
+
+                padding:
+                    14px;
+            }
+
+
+            .login-shell {
+
+                border-radius:
+                    24px;
+            }
+
+
+            .form-panel {
+
+                min-height:
+                    560px;
+
+                padding:
+                    35px 20px;
+            }
+
+
+            .form-title {
+
+                font-size:
+                    28px;
+            }
+
+
+            .form-subtitle {
+
+                font-size:
+                    12px;
+            }
+
+
+            .form-control-custom,
+            .login-btn {
+
+                height:
+                    52px;
+            }
+
+
+            .support-row {
+
+                align-items:
+                    flex-start;
+
+                gap:
+                    10px;
+            }
+
+        }
+
+
+        /* =====================================================
+           ACCESSIBILITY
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-page">
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="grid"></div>
+
+    <div class="glow glow-one"></div>
+
+    <div class="glow glow-two"></div>
+
+    <div class="glow glow-three"></div>
+
+
+    <span class="particle p1"></span>
+    <span class="particle p2"></span>
+    <span class="particle p3"></span>
+    <span class="particle p4"></span>
+    <span class="particle p5"></span>
+
+
+    <!-- =====================================================
+         LOGIN SHELL
+    ====================================================== -->
+
+    <div class="login-shell">
+
+
+        <!-- =================================================
+             BRAND SIDE
+        ================================================== -->
+
+        <section class="brand-panel">
+
+            <div class="brand-content">
+
+
+                <!-- Workspace Badge -->
+
+                <div class="workspace-badge">
+
+                    <span class="workspace-dot"></span>
+
+                    TEAM WORKSPACE
+
+                </div>
+
+
+                <!-- Logo -->
+
+                <div class="logo">
+
+                    <span class="logo-mark">
+                        T
+                    </span>
+
+                </div>
+
+
+                <!-- Main Title -->
+
+                <h1 class="brand-title">
+
+                    Work smarter.
+                    <br>
+
+                    <span>
+                        Move faster.
+                    </span>
+
+                </h1>
+
+
+                <!-- Description -->
+
+                <p class="brand-description">
+
+                    A centralized workspace for managing projects,
+                    assigning tasks, tracking deadlines and keeping
+                    your entire team aligned.
+
+                </p>
+
+
+                <!-- Features -->
+
+                <div class="feature-grid">
+
+
+                    <div class="feature">
+
+                        <span class="feature-dot"></span>
+
+                        Project Management
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-dot"></span>
+
+                        Task Assignment
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-dot"></span>
+
+                        Team Collaboration
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-dot"></span>
+
+                        Progress Tracking
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOGIN SIDE
+        ================================================== -->
+
+        <section class="form-panel">
+
+
+            <div class="form-content">
+
+
+                <!-- Secure Badge -->
+
+                <div class="secure-badge">
+
+                    <span class="secure-dot"></span>
+
+                    SECURE ACCESS
+
+                </div>
+
+
+                <!-- Heading -->
+
+                <h2 class="form-title">
+
+                    Welcome back
+
+                </h2>
+
+
+                <p class="form-subtitle">
+
+                    Sign in to access your Team Task Manager workspace.
+
+                </p>
+
+
+
+                <!-- =================================================
+                     DJANGO MESSAGES
+                ================================================== -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="alert alert-danger mb-4"
+                            role="alert"
+                        >
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                     LOGIN FORM
+                ================================================== -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- Username -->
+
+                    <div class="mb-4">
+
+                        <label
+                            for="username"
+                            class="form-label"
+                        >
+
+                            Username
+
+                        </label>
+
+
+                        <div class="input-wrap">
+
+                            <span class="input-icon">
+                                ◉
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                class="form-control-custom"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                                autofocus
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Password -->
+
+                    <div class="mb-2">
+
+                        <label
+                            for="password"
+                            class="form-label"
+                        >
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-wrap">
+
+                            <span class="input-icon">
+                                ◈
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control-custom password-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                onclick="togglePassword()"
+                                aria-label="Show or hide password"
+                            >
+
+                                Show
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Support Row -->
+
+                    <div class="support-row">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                name="remember"
+                            >
+
+                            <span>
+                                Remember this device
+                            </span>
+
+                        </label>
+
+
+                        <span class="workspace-label">
+
+                            Internal workspace
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Login Button -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                    >
+
+                        <span class="login-inner">
+
+                            Sign In
+
+                            <span class="arrow">
+                                →
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- Security -->
+
+                <div class="security">
+
+                    <span class="security-lock">
+                        🔐
+                    </span>
+
+                    Secure authentication powered by Django
+
+                </div>
+
+
+                <!-- Footer -->
+
+                <div class="bottom-note">
+
+                    TEAM PROJECT & TASK MANAGEMENT PLATFORM
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     PASSWORD TOGGLE
+========================================================= -->
+
+<script>
+
+    function togglePassword() {
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const passwordToggle =
+            document.getElementById("passwordToggle");
+
+
+        if (
+            passwordInput.type === "password"
+        ) {
+
+            passwordInput.type = "text";
+
+            passwordToggle.textContent =
+                "Hide";
+
+        } else {
+
+            passwordInput.type = "password";
+
+            passwordToggle.textContent =
+                "Show";
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+```

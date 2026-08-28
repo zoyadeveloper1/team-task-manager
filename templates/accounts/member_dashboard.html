@@ -1,0 +1,2750 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Member Dashboard | Team Task Manager
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+
+            --sidebar: #0b1220;
+            --sidebar-dark: #09101d;
+
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+
+            --success: #16a34a;
+            --success-soft: #ecfdf3;
+
+            --warning: #d97706;
+            --warning-soft: #fff7ed;
+
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+
+            --text: #0f172a;
+            --muted: #64748b;
+            --light: #94a3b8;
+
+            --border: #e6eaf0;
+            --surface: #ffffff;
+            --page: #f7f8fc;
+        }
+
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            background:
+                var(--page);
+
+            color:
+                var(--text);
+
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           APP
+        ====================================================== */
+
+        .app {
+
+            min-height: 100vh;
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: 245px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--sidebar),
+                    var(--sidebar-dark)
+                );
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            z-index: 1000;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .sidebar-brand {
+
+            min-height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                0 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .brand-mark {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            font-weight:
+                800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #2563eb
+                );
+
+            box-shadow:
+                0 8px 20px
+                rgba(59,130,246,0.18);
+        }
+
+
+        .brand-title {
+
+            color:
+                white;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .brand-subtitle {
+
+            margin-top:
+                3px;
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+        }
+
+
+        .sidebar-section {
+
+            padding:
+                20px 14px 7px;
+
+            color:
+                #64748b;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.8px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .nav-list {
+
+            padding:
+                0 10px;
+        }
+
+
+        .nav-link {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding:
+                11px 12px;
+
+            margin-bottom:
+                4px;
+
+            border-radius:
+                10px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                11px;
+
+            font-weight:
+                500;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .nav-link:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            transform:
+                translateX(2px);
+        }
+
+
+        .nav-link.active {
+
+            color:
+                white;
+
+            background:
+                rgba(99,102,241,0.16);
+
+            box-shadow:
+                inset 3px 0 0
+                #6366f1;
+        }
+
+
+        .nav-icon {
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            border-radius:
+                8px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            font-size:
+                13px;
+        }
+
+
+        .sidebar-spacer {
+            flex: 1;
+        }
+
+
+        .sidebar-footer {
+
+            padding:
+                14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+
+        .sidebar-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                10px;
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,0.035);
+        }
+
+
+        .sidebar-avatar {
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border-radius:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #2563eb
+                );
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        .sidebar-user-name {
+
+            color:
+                white;
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+        }
+
+
+        .sidebar-user-role {
+
+            margin-top:
+                2px;
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            width:
+                calc(100% - 245px);
+
+            margin-left:
+                245px;
+
+            min-height:
+                100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ====================================================== */
+
+        .topbar {
+
+            height:
+                74px;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                0 28px;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            backdrop-filter:
+                blur(16px);
+
+            -webkit-backdrop-filter:
+                blur(16px);
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .topbar-title {
+
+            margin:
+                0;
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -0.4px;
+        }
+
+
+        .topbar-subtitle {
+
+            margin:
+                4px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+        }
+
+
+        .topbar-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+        }
+
+
+        .online-pill {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                8px 10px;
+
+            border-radius:
+                9px;
+
+            color:
+                #15803d;
+
+            background:
+                #f4fbf6;
+
+            border:
+                1px solid
+                #dcefe3;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+        }
+
+
+        .online-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+
+            box-shadow:
+                0 0 8px
+                rgba(34,197,94,0.4);
+
+            animation:
+                pulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity:
+                    .5;
+
+                transform:
+                    scale(.8);
+            }
+
+            50% {
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.15);
+            }
+        }
+
+
+        .topbar-avatar {
+
+            width:
+                35px;
+
+            height:
+                35px;
+
+            border-radius:
+                10px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #818cf8,
+                    #38bdf8
+                );
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            padding:
+                28px;
+
+            max-width:
+                1400px;
+
+            margin:
+                0 auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                30px;
+
+            border-radius:
+                18px;
+
+            min-height:
+                210px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172554,
+                    #1e3a8a
+                );
+
+            box-shadow:
+                0 22px 50px
+                rgba(15,23,42,0.12);
+
+            animation:
+                reveal .65s ease both;
+        }
+
+
+        @keyframes reveal {
+
+            from {
+                opacity:
+                    0;
+
+                transform:
+                    translateY(12px);
+            }
+
+            to {
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        .hero::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                450px;
+
+            height:
+                450px;
+
+            right:
+                -220px;
+
+            top:
+                -260px;
+
+            border-radius:
+                50%;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            animation:
+                orbit 16s linear infinite;
+        }
+
+
+        @keyframes orbit {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        .hero-content {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            max-width:
+                750px;
+        }
+
+
+        .hero-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                7px 10px;
+
+            border-radius:
+                7px;
+
+            color:
+                #c7d2fe;
+
+            background:
+                rgba(99,102,241,0.13);
+
+            border:
+                1px solid
+                rgba(129,140,248,0.18);
+
+            font-size:
+                8px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                .6px;
+        }
+
+
+        .hero-title {
+
+            margin:
+                14px 0 8px;
+
+            color:
+                white;
+
+            font-size:
+                clamp(27px, 3vw, 39px);
+
+            line-height:
+                1.12;
+
+            letter-spacing:
+                -1.4px;
+
+            font-weight:
+                800;
+        }
+
+
+        .hero-title span {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #c7d2fe,
+                    #93c5fd,
+                    #67e8f9
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .hero-description {
+
+            max-width:
+                650px;
+
+            margin:
+                0;
+
+            color:
+                rgba(226,232,240,0.66);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.75;
+        }
+
+
+        .hero-actions {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px;
+
+            margin-top:
+                18px;
+        }
+
+
+        .hero-btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-height:
+                34px;
+
+            padding:
+                0 12px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            transition:
+                transform .2s ease,
+                background .2s ease;
+        }
+
+
+        .hero-btn-primary {
+
+            color:
+                #0f172a;
+
+            background:
+                #ffffff;
+        }
+
+
+        .hero-btn-primary:hover {
+
+            color:
+                #0f172a;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .hero-btn-secondary {
+
+            color:
+                rgba(255,255,255,0.88);
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+        }
+
+
+        .hero-btn-secondary:hover {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,0.12);
+        }
+
+
+        /* =====================================================
+           STATISTICS
+        ====================================================== */
+
+        .stats {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                13px;
+
+            margin-top:
+                13px;
+        }
+
+
+        .stat {
+
+            background:
+                var(--surface);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            padding:
+                17px;
+
+            box-shadow:
+                0 7px 25px
+                rgba(15,23,42,0.035);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .stat:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 16px 30px
+                rgba(15,23,42,0.06);
+        }
+
+
+        .stat-top {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+        }
+
+
+        .stat-title {
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+        }
+
+
+        .stat-icon {
+
+            width:
+                33px;
+
+            height:
+                33px;
+
+            border-radius:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #f8fafc;
+
+            font-size:
+                13px;
+        }
+
+
+        .stat-value {
+
+            margin-top:
+                11px;
+
+            font-size:
+                26px;
+
+            line-height:
+                1;
+
+            font-weight:
+                800;
+        }
+
+
+        .stat-note {
+
+            margin-top:
+                7px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .stat-primary .stat-icon {
+            background:
+                var(--primary-soft);
+        }
+
+
+        .stat-success .stat-icon {
+            background:
+                var(--success-soft);
+        }
+
+
+        .stat-warning .stat-icon {
+            background:
+                var(--warning-soft);
+        }
+
+
+        .stat-danger .stat-icon {
+            background:
+                var(--danger-soft);
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ====================================================== */
+
+        .main-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.25fr .75fr;
+
+            gap:
+                13px;
+
+            margin-top:
+                13px;
+        }
+
+
+        .panel {
+
+            background:
+                var(--surface);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            box-shadow:
+                0 7px 25px
+                rgba(15,23,42,0.035);
+        }
+
+
+        .panel-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                18px 18px 0;
+        }
+
+
+        .panel-title {
+
+            margin:
+                0;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .panel-subtitle {
+
+            margin:
+                4px 0 0;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        /* =====================================================
+           TASK STATUS
+        ====================================================== */
+
+        .status-body {
+
+            padding:
+                20px 18px;
+        }
+
+
+        .status-progress {
+
+            height:
+                8px;
+
+            border-radius:
+                99px;
+
+            overflow:
+                hidden;
+
+            background:
+                #edf1f5;
+        }
+
+
+        .status-progress span {
+
+            display:
+                block;
+
+            height:
+                100%;
+
+            border-radius:
+                inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #4f46e5,
+                    #38bdf8
+                );
+
+            width:
+                0;
+
+            animation:
+                progressGrow
+                1.2s
+                ease
+                forwards;
+        }
+
+
+        @keyframes progressGrow {
+
+            to {
+                width:
+                    var(--progress);
+            }
+        }
+
+
+        .status-summary {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                10px;
+
+            margin-top:
+                18px;
+        }
+
+
+        .status-box {
+
+            padding:
+                12px;
+
+            border-radius:
+                11px;
+
+            background:
+                #f8fafc;
+
+            border:
+                1px solid
+                #eef2f6;
+        }
+
+
+        .status-box-label {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .status-box-value {
+
+            margin-top:
+                4px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                800;
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ====================================================== */
+
+        .quick-list {
+
+            padding:
+                18px;
+        }
+
+
+        .quick-action {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                11px;
+
+            margin-bottom:
+                8px;
+
+            border-radius:
+                11px;
+
+            border:
+                1px solid
+                #edf1f5;
+
+            background:
+                #ffffff;
+
+            color:
+                #334155;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .quick-action:last-child {
+            margin-bottom:
+                0;
+        }
+
+
+        .quick-action:hover {
+
+            transform:
+                translateX(4px);
+
+            border-color:
+                #c7d2fe;
+
+            box-shadow:
+                0 8px 20px
+                rgba(79,70,229,0.06);
+
+            color:
+                #334155;
+        }
+
+
+        .quick-icon {
+
+            width:
+                33px;
+
+            height:
+                33px;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #f8fafc;
+
+            font-size:
+                13px;
+        }
+
+
+        .quick-text {
+            flex: 1;
+        }
+
+
+        .quick-title {
+
+            display:
+                block;
+
+            color:
+                #1e293b;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+        }
+
+
+        .quick-desc {
+
+            display:
+                block;
+
+            margin-top:
+                2px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                8px;
+        }
+
+
+        .quick-arrow {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =====================================================
+           INFORMATION CARDS
+        ====================================================== */
+
+        .info-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                13px;
+
+            margin-top:
+                13px;
+        }
+
+
+        .info-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                19px;
+
+            background:
+                white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                15px;
+
+            box-shadow:
+                0 7px 25px
+                rgba(15,23,42,0.035);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .info-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 16px 32px
+                rgba(15,23,42,0.06);
+        }
+
+
+        .info-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                110px;
+
+            height:
+                110px;
+
+            border-radius:
+                50%;
+
+            right:
+                -50px;
+
+            bottom:
+                -50px;
+
+            background:
+                #f8fafc;
+        }
+
+
+        .info-card h3 {
+
+            position:
+                relative;
+
+            margin:
+                0 0 7px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+        }
+
+
+        .info-card p {
+
+            position:
+                relative;
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                9px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .info-btn {
+
+            position:
+                relative;
+
+            display:
+                inline-flex;
+
+            margin-top:
+                14px;
+
+            min-height:
+                32px;
+
+            align-items:
+                center;
+
+            padding:
+                0 10px;
+
+            border-radius:
+                8px;
+
+            color:
+                #4338ca;
+
+            background:
+                #eef2ff;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .info-btn:hover {
+
+            color:
+                #3730a3;
+
+            background:
+                #e0e7ff;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-top:
+                13px;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(255,255,255,0.86);
+        }
+
+
+        .footer-text {
+
+            color:
+                #94a3b8;
+
+            font-size:
+                9px;
+        }
+
+
+        .footer-status {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            color:
+                #64748b;
+
+            font-size:
+                9px;
+        }
+
+
+        .footer-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                #22c55e;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1050px) {
+
+            .sidebar {
+                width:
+                    220px;
+            }
+
+
+            .main {
+
+                width:
+                    calc(100% - 220px);
+
+                margin-left:
+                    220px;
+            }
+
+
+            .main-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+
+                width:
+                    72px;
+            }
+
+
+            .brand-title,
+            .brand-subtitle,
+            .sidebar-section,
+            .nav-link span:not(.nav-icon),
+            .sidebar-user > div:not(.sidebar-avatar) {
+
+                display:
+                    none;
+            }
+
+
+            .sidebar-brand {
+
+                justify-content:
+                    center;
+
+                padding:
+                    0;
+            }
+
+
+            .nav-link {
+
+                justify-content:
+                    center;
+
+                padding:
+                    10px;
+            }
+
+
+            .main {
+
+                width:
+                    calc(100% - 72px);
+
+                margin-left:
+                    72px;
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .info-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                height:
+                    65px;
+
+                padding:
+                    0 14px;
+            }
+
+
+            .topbar-subtitle,
+            .online-pill {
+
+                display:
+                    none;
+            }
+
+
+            .topbar-title {
+
+                font-size:
+                    15px;
+            }
+
+
+            .content {
+
+                padding:
+                    18px 14px 40px;
+            }
+
+
+            .hero {
+
+                padding:
+                    22px;
+
+                min-height:
+                    auto;
+
+                border-radius:
+                    15px;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    26px;
+            }
+
+
+            .stats {
+
+                gap:
+                    9px;
+            }
+
+
+            .stat {
+
+                padding:
+                    14px;
+            }
+
+
+            .stat-value {
+
+                font-size:
+                    23px;
+            }
+
+
+            .status-summary {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                T
+            </div>
+
+            <div>
+
+                <div class="brand-title">
+                    Team Task Manager
+                </div>
+
+                <div class="brand-subtitle">
+                    Member Workspace
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-section">
+            Workspace
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'accounts:member_dashboard' %}"
+                class="nav-link active"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Overview
+                </span>
+
+            </a>
+
+
+            <a
+                href="{% url 'tasks:my_tasks' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                <span>
+                    My Tasks
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-section">
+            Account
+        </div>
+
+
+        <nav class="nav-list">
+
+
+            <a
+                href="{% url 'accounts:logout' %}"
+                class="nav-link"
+            >
+
+                <span class="nav-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-spacer"></div>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-user">
+
+                <div class="sidebar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <div class="sidebar-user-name">
+                        {{ request.user.username }}
+                    </div>
+
+                    <div class="sidebar-user-role">
+                        Team Member
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1 class="topbar-title">
+                    My Workspace
+                </h1>
+
+                <p class="topbar-subtitle">
+                    View assigned work and keep your tasks moving.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <div class="online-pill">
+
+                    <span class="online-dot"></span>
+
+                    Workspace active
+
+                </div>
+
+
+                <div class="topbar-avatar">
+
+                    {{ request.user.username|first|upper }}
+
+                </div>
+
+
+                <a
+                    href="{% url 'accounts:logout' %}"
+                    class="btn btn-sm btn-outline-dark"
+                >
+                    Logout
+                </a>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="hero">
+
+
+                <div class="hero-content">
+
+
+                    <div class="hero-badge">
+
+                        ● MEMBER WORKSPACE
+
+                    </div>
+
+
+                    <h2 class="hero-title">
+
+                        Welcome back,
+                        <span>
+                            {{ request.user.username }}
+                        </span>
+
+                    </h2>
+
+
+                    <p class="hero-description">
+
+                        Keep track of your assigned tasks, deadlines
+                        and progress updates from one focused workspace.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+
+                        <a
+                            href="{% url 'tasks:my_tasks' %}"
+                            class="hero-btn hero-btn-primary"
+                        >
+                            View My Tasks
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:my_tasks' %}"
+                            class="hero-btn hero-btn-secondary"
+                        >
+                            Update Progress
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <section class="stats">
+
+
+                <div class="stat stat-primary">
+
+                    <div class="stat-top">
+
+                        <span class="stat-title">
+                            Assigned Tasks
+                        </span>
+
+                        <span class="stat-icon">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="stat-value">
+                        {{ assigned_tasks_count|default:"0" }}
+                    </div>
+
+                    <div class="stat-note">
+                        Tasks currently assigned
+                    </div>
+
+                </div>
+
+
+                <div class="stat stat-warning">
+
+                    <div class="stat-top">
+
+                        <span class="stat-title">
+                            In Progress
+                        </span>
+
+                        <span class="stat-icon">
+                            ◷
+                        </span>
+
+                    </div>
+
+                    <div class="stat-value text-warning">
+                        {{ in_progress_count|default:"0" }}
+                    </div>
+
+                    <div class="stat-note">
+                        Work currently underway
+                    </div>
+
+                </div>
+
+
+                <div class="stat stat-success">
+
+                    <div class="stat-top">
+
+                        <span class="stat-title">
+                            Completed
+                        </span>
+
+                        <span class="stat-icon">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <div class="stat-value text-success">
+                        {{ completed_count|default:"0" }}
+                    </div>
+
+                    <div class="stat-note">
+                        Successfully delivered
+                    </div>
+
+                </div>
+
+
+                <div class="stat stat-danger">
+
+                    <div class="stat-top">
+
+                        <span class="stat-title">
+                            Upcoming
+                        </span>
+
+                        <span class="stat-icon">
+                            !
+                        </span>
+
+                    </div>
+
+                    <div class="stat-value text-danger">
+                        {{ upcoming_count|default:"0" }}
+                    </div>
+
+                    <div class="stat-note">
+                        Upcoming deadlines
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN GRID
+            ================================================== -->
+
+            <section class="main-grid">
+
+
+                <!-- PROGRESS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <h3 class="panel-title">
+                                My Task Progress
+                            </h3>
+
+                            <p class="panel-subtitle">
+                                Track your completion rate
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'tasks:my_tasks' %}"
+                            class="panel-action"
+                        >
+                            View Tasks
+                        </a>
+
+
+                    </div>
+
+
+                    <div class="status-body">
+
+
+                        <div
+                            class="status-progress"
+                            style="
+                                --progress:
+                                {{ member_progress|default:'0' }}%;
+                            "
+                        >
+
+                            <span></span>
+
+                        </div>
+
+
+                        <div class="status-summary">
+
+
+                            <div class="status-box">
+
+                                <div class="status-box-label">
+                                    Assigned
+                                </div>
+
+                                <div class="status-box-value">
+                                    {{ assigned_tasks_count|default:"0" }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="status-box">
+
+                                <div class="status-box-label">
+                                    In Progress
+                                </div>
+
+                                <div class="status-box-value text-warning">
+                                    {{ in_progress_count|default:"0" }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="status-box">
+
+                                <div class="status-box-label">
+                                    Completed
+                                </div>
+
+                                <div class="status-box-value text-success">
+                                    {{ completed_count|default:"0" }}
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-header">
+
+
+                        <div>
+
+                            <h3 class="panel-title">
+                                Quick Actions
+                            </h3>
+
+                            <p class="panel-subtitle">
+                                Frequently used actions
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="quick-list">
+
+
+                        <a
+                            href="{% url 'tasks:my_tasks' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                ✓
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    View My Tasks
+                                </span>
+
+                                <span class="quick-desc">
+                                    Review assigned work
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'tasks:my_tasks' %}"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-icon">
+                                ↻
+                            </span>
+
+                            <span class="quick-text">
+
+                                <span class="quick-title">
+                                    Update Progress
+                                </span>
+
+                                <span class="quick-desc">
+                                    Change task status
+                                </span>
+
+                            </span>
+
+                            <span class="quick-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 INFORMATION
+            ================================================== -->
+
+            <section class="info-grid">
+
+
+                <article class="info-card">
+
+
+                    <h3>
+                        Assigned Work
+                    </h3>
+
+
+                    <p>
+
+                        Open your task workspace to view
+                        project information, priorities and
+                        deadlines assigned by the administrator.
+
+                    </p>
+
+
+                    <a
+                        href="{% url 'tasks:my_tasks' %}"
+                        class="info-btn"
+                    >
+                        View My Tasks →
+                    </a>
+
+
+                </article>
+
+
+
+                <article class="info-card">
+
+
+                    <h3>
+                        Progress Updates
+                    </h3>
+
+
+                    <p>
+
+                        Keep your task status up to date and
+                        add comments so the team can track
+                        your latest progress.
+
+                    </p>
+
+
+                    <a
+                        href="{% url 'tasks:my_tasks' %}"
+                        class="info-btn"
+                    >
+                        Update Tasks →
+                    </a>
+
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="footer">
+
+
+                <div class="footer-text">
+
+                    Team Task Manager · Member Workspace
+
+                </div>
+
+
+                <div class="footer-status">
+
+                    <span class="footer-dot"></span>
+
+                    Account active
+
+                </div>
+
+
+            </footer>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script>
+
+    /*
+     * Small entrance animation for numeric statistic cards.
+     */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const values =
+                document.querySelectorAll(
+                    ".stat-value"
+                );
+
+
+            values.forEach(
+                function (element) {
+
+                    const value =
+                        parseInt(
+                            element.textContent.trim()
+                        );
+
+
+                    if (
+                        Number.isNaN(value) ||
+                        value <= 0
+                    ) {
+                        return;
+                    }
+
+
+                    element.textContent =
+                        "0";
+
+
+                    const start =
+                        performance.now();
+
+                    const duration =
+                        650;
+
+
+                    function animate(now) {
+
+                        const progress =
+                            Math.min(
+                                (now - start) /
+                                duration,
+                                1
+                            );
+
+
+                        element.textContent =
+                            Math.floor(
+                                value * progress
+                            );
+
+
+                        if (
+                            progress < 1
+                        ) {
+
+                            requestAnimationFrame(
+                                animate
+                            );
+
+                        } else {
+
+                            element.textContent =
+                                value;
+                        }
+
+                    }
+
+
+                    requestAnimationFrame(
+                        animate
+                    );
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+```
