@@ -1,116 +1,126 @@
-# Team Task Manager
+# Team Task Management System
 
-A full-stack Team Project & Task Management web application built with **Python, Django, SQLite, HTML, CSS, and Bootstrap**.
+A modern **Server-Side Rendered (SSR) Team Task Management System** built with **Python and Django**.
 
-This application allows admins to manage projects, team members, and tasks, while team members can view assigned tasks, update task status, and add progress comments.
+The application allows administrators to manage projects, team members, and tasks, while team members can view their assigned tasks, update task status, and add progress updates.
 
-## Features
+(image.png)
 
-### Admin
+## 🚀 Project Overview
 
-* Admin authentication
-* Role-based access control
+Team Task Management is an internal workspace designed to help teams organize their daily project work efficiently.
+
+The application provides role-based access for:
+
+* **Admin**
+* **Team Member**
+
+(image-1.png)
+
+Admins can create projects, manage team members, assign tasks, set priorities and deadlines, and monitor overall progress.
+
+Team members can view their assigned tasks, update task status, and add progress comments.
+
+---
+
+## ✨ Features
+
+### 👨‍💼 Admin
+
+* Secure admin login
+* Admin dashboard
 * Create projects
-* View projects
 * Edit projects
 * Delete projects
 * View project progress
 * Add team members
-* View team members
+* Manage team members
 * Create tasks
+* Edit tasks
 * Assign tasks to team members
 * Set task priority
 * Set task status
 * Set task deadlines
-* Edit tasks
-* Search and filter tasks
+* Search tasks
+* Filter tasks by:
+
+  * Project
+  * Team member
+  * Priority
+  * Status
 * View task details
-* Maintain deadline change history
+* Track completed and pending tasks
+* Track overall project progress
+* Maintain deadline history
 
-### Team Member
+### 👨‍💻 Team Member
 
-* Secure login
-* Role-based dashboard
+* Secure team member login
+* Team member dashboard
 * View assigned tasks
-* View project information
-* View task priority
-* View task deadline
+* View task details
 * Update task status
 * Add progress comments
-* View progress history
+* Track project and task deadlines
 
-## Special Feature: Deadline History
+---
 
-When an admin changes a task deadline, the application stores the previous deadline and the new deadline.
+## 🎯 User Roles
 
-Example:
+| Role        | Access                                        |
+| ----------- | --------------------------------------------- |
+| Admin       | Full project, team member and task management |
+| Team Member | View assigned tasks and update progress       |
 
-| Old Deadline | New Deadline | Changed By | Changed At   |
-| ------------ | ------------ | ---------- | ------------ |
-| Aug 31, 2026 | Sep 5, 2026  | durga      | Aug 28, 2026 |
+---
 
-This provides a complete history of deadline changes.
+## 🏗️ Technology Stack
 
-## Technology Stack
+### Backend
+
+* Python
+* Django
+* Django ORM
+* Django Authentication
+* SQLite
 
 ### Frontend
 
 * HTML5
 * CSS3
 * Bootstrap 5
+* JavaScript
+* Google Fonts
+
+### Architecture
+
+* Server-Side Rendering (SSR)
 * Django Templates
+* Role-Based Access Control
+* MVC/MVT architecture
 
-### Backend
+---
 
-* Python
-* Django
-
-### Database
-
-* SQLite
-
-### Authentication
-
-* Django Authentication System
-* Custom User Model
-* Role-based access control
-
-### Deployment
-
-* GitHub
-* Render
-
-## Project Architecture
-
-This project uses a **Server-Side Rendering (SSR)** architecture.
-
-```text
-Browser
-   |
-   v
-Django
-   |
-   +-- Templates
-   |
-   +-- Views
-   |
-   +-- Forms
-   |
-   +-- Models / ORM
-   |
-   v
-SQLite Database
-```
-
-The frontend and backend are implemented inside the same Django project and can be deployed as a single web service.
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
 team-task-manager/
 │
+├── config/
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
 ├── accounts/
 │   ├── migrations/
+│   ├── templates/
+│   │   └── accounts/
+│   │       ├── login.html
+│   │       ├── admin_dashboard.html
+│   │       ├── member_dashboard.html
+│   │       ├── add_team_member.html
+│   │       └── team_members.html
+│   │
 │   ├── forms.py
 │   ├── models.py
 │   ├── urls.py
@@ -118,6 +128,12 @@ team-task-manager/
 │
 ├── projects/
 │   ├── migrations/
+│   ├── templates/
+│   │   └── projects/
+│   │       ├── project_list.html
+│   │       ├── project_form.html
+│   │       └── project_confirm_delete.html
+│   │
 │   ├── forms.py
 │   ├── models.py
 │   ├── urls.py
@@ -125,122 +141,220 @@ team-task-manager/
 │
 ├── tasks/
 │   ├── migrations/
+│   ├── templates/
+│   │   └── tasks/
+│   │       ├── task_list.html
+│   │       ├── task_form.html
+│   │       ├── my_tasks.html
+│   │       └── task_detail.html
+│   │
 │   ├── forms.py
 │   ├── models.py
 │   ├── urls.py
 │   └── views.py
 │
 ├── templates/
-│   ├── accounts/
-│   ├── projects/
-│   └── tasks/
-│
-├── static/
-│
-├── config/
-│   ├── settings.py
-│   ├── urls.py
-│   ├── asgi.py
-│   └── wsgi.py
 │
 ├── db.sqlite3
+│
 ├── manage.py
-├── requirements.txt
-└── README.md
+│
+└── requirements.txt
 ```
 
-## Database Models
+---
+
+## 🗄️ Main Data Models
 
 ### User
 
+Stores application users and their roles.
+
 ```text
 User
-----------------
-id
-username
-email
-password
-role
-```
-
-Roles:
-
-```text
-ADMIN
-TEAM_MEMBER
+├── username
+├── email
+├── password
+└── role
+    ├── ADMIN
+    └── TEAM_MEMBER
 ```
 
 ### Project
 
+Stores project information.
+
 ```text
 Project
-----------------
-id
-name
-description
-start_date
-end_date
-created_at
-updated_at
+├── name
+├── description
+├── start_date
+└── end_date
 ```
 
 ### Task
 
+Stores task information.
+
 ```text
 Task
-----------------
-id
-project
-title
-description
-assigned_to
-priority
-status
-deadline
-created_at
-updated_at
-```
-
-### Task Comment
-
-```text
-TaskComment
-----------------
-id
-task
-user
-comment
-created_at
+├── project
+├── title
+├── description
+├── assigned_to
+├── priority
+├── status
+└── deadline
 ```
 
 ### Deadline History
 
+Tracks deadline changes made to existing tasks.
+
 ```text
 DeadlineHistory
-----------------
-id
-task
-old_deadline
-new_deadline
-changed_by
-changed_at
+├── task
+├── old_deadline
+├── new_deadline
+└── changed_by
 ```
 
-## Installation
+### Task Comment
 
-### 1. Clone Repository
+Stores team member progress updates.
+
+```text
+TaskComment
+├── task
+├── user
+└── comment
+```
+
+---
+
+## 🔐 Authentication & Authorization
+
+The project uses Django authentication for secure login.
+
+After successful login, users are redirected based on their role:
+
+```text
+Admin
+   ↓
+Admin Dashboard
+
+Team Member
+   ↓
+Team Member Dashboard
+```
+
+Unauthorized users are redirected away from restricted pages.
+
+---
+
+## 📊 Dashboard
+
+### Admin Dashboard
+
+The admin dashboard provides:
+
+* Total projects
+* Total tasks
+* Completed tasks
+* Pending tasks
+* Overall completion percentage
+* Project management
+* Team member management
+* Task management
+* Quick actions
+
+### Team Member Dashboard
+
+The team member dashboard provides:
+
+* Assigned task access
+* Task progress workflow
+* Status updates
+* Progress comments
+
+---
+
+## 🔄 Task Workflow
+
+```text
+Create Task
+     ↓
+Assign Team Member
+     ↓
+Set Priority
+     ↓
+Set Deadline
+     ↓
+To Do
+     ↓
+In Progress
+     ↓
+Completed
+```
+
+---
+
+## 🔎 Task Search & Filtering
+
+Admins can quickly find tasks using:
+
+```text
+Search
+   +
+Project
+   +
+Assigned Member
+   +
+Priority
+   +
+Status
+```
+
+This makes task management easier when the number of tasks increases.
+
+---
+
+## 🎨 UI / UX
+
+The interface is designed with a modern enterprise SaaS style.
+
+Highlights include:
+
+* Responsive layouts
+* Professional typography
+* Modern dashboard cards
+* Sidebar navigation
+* Top navigation bar
+* Animated login interface
+* Progress indicators
+* Status badges
+* Responsive tables
+* Form validation states
+* Password visibility toggle
+* Mobile-friendly layouts
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/team-task-manager.git
+git clone https://github.com/your-username/team-task-manager.git
 ```
 
-Go to the project:
+### 2. Open the project
 
 ```bash
 cd team-task-manager
 ```
 
-### 2. Create Virtual Environment
+### 3. Create a virtual environment
 
 Windows:
 
@@ -254,26 +368,26 @@ Activate:
 venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Apply Migrations
+### 5. Run migrations
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 5. Create Admin User
+### 6. Create an admin/superuser
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 6. Run Development Server
+### 7. Run the development server
 
 ```bash
 python manage.py runserver
@@ -282,185 +396,124 @@ python manage.py runserver
 Open:
 
 ```text
-http://127.0.0.1:8000/accounts/login/
+http://127.0.0.1:8000/
 ```
 
-## Login Flow
+---
 
-### Admin
+## 🔑 Application Flow
 
 ```text
 Login
-   ↓
-Role = ADMIN
-   ↓
-Admin Dashboard
+  │
+  ├── Admin
+  │     └── Admin Dashboard
+  │           ├── Projects
+  │           ├── Team Members
+  │           └── Tasks
+  │
+  └── Team Member
+        └── Member Dashboard
+              └── My Tasks
+                    ├── Update Status
+                    └── Add Progress
 ```
 
-### Team Member
+---
 
-```text
-Login
-   ↓
-Role = TEAM_MEMBER
-   ↓
-Team Member Dashboard
+## 🧪 Testing
+
+Run Django system checks:
+
+```bash
+python manage.py check
 ```
 
-## Main URLs
+Run tests:
 
-| URL                           | Description           | Access                  |
-| ----------------------------- | --------------------- | ----------------------- |
-| `/accounts/login/`            | Login page            | Public                  |
-| `/accounts/logout/`           | Logout                | Authenticated           |
-| `/accounts/admin-dashboard/`  | Admin dashboard       | Admin                   |
-| `/accounts/member-dashboard/` | Team member dashboard | Team Member             |
-| `/accounts/team-members/`     | Team member list      | Admin                   |
-| `/accounts/team-members/add/` | Add team member       | Admin                   |
-| `/projects/`                  | Project list          | Admin                   |
-| `/projects/create/`           | Create project        | Admin                   |
-| `/projects/<id>/edit/`        | Edit project          | Admin                   |
-| `/projects/<id>/delete/`      | Delete project        | Admin                   |
-| `/tasks/`                     | Task list             | Admin                   |
-| `/tasks/create/`              | Create task           | Admin                   |
-| `/tasks/<id>/edit/`           | Edit task             | Admin                   |
-| `/tasks/<id>/`                | Task details          | Admin / Assigned Member |
-| `/tasks/my-tasks/`            | Assigned tasks        | Team Member             |
-
-## API / Endpoint Reference
-
-The application primarily uses Django server-rendered views.
-
-### Authentication
-
-```text
-GET  /accounts/login/
-POST /accounts/login/
-GET  /accounts/logout/
+```bash
+python manage.py test
 ```
 
-### Projects
+---
 
-```text
-GET  /projects/
-GET  /projects/create/
-POST /projects/create/
-GET  /projects/<id>/edit/
-POST /projects/<id>/edit/
-GET  /projects/<id>/delete/
-POST /projects/<id>/delete/
-```
+## 🔒 Security Considerations
 
-### Tasks
+The project uses Django's built-in security features including:
 
-```text
-GET  /tasks/
-GET  /tasks/create/
-POST /tasks/create/
-GET  /tasks/<id>/
-GET  /tasks/<id>/edit/
-POST /tasks/<id>/edit/
-```
-
-### Team Member Task Actions
-
-```text
-GET  /tasks/my-tasks/
-POST /tasks/<id>/status/
-POST /tasks/<id>/comment/
-```
-
-## Search and Filters
-
-Admin users can filter tasks using:
-
-```text
-Search by task title
-Project
-Assigned Team Member
-Priority
-Status
-```
-
-Example:
-
-```text
-/tasks/?search=frontend&priority=HIGH&status=TODO
-```
-
-## Validation
-
-The application includes form validation for:
-
-* Required fields
-* Project date validation
-* Task deadline
-* Valid task status
-* Valid task priority
-* Team member assignment
-
-## Security
-
-The application uses:
-
-* Django password hashing
 * CSRF protection
-* Authentication
+* Password hashing
+* Session authentication
+* Login-required views
 * Role-based authorization
-* Login-required protected views
-* Restricted access to assigned tasks
+* Django ORM
+* Server-side form validation
 
-## Error Handling
+---
 
-The application handles common cases such as:
+## 🌱 Future Improvements
 
-* Invalid login credentials
-* Unauthorized dashboard access
-* Unauthorized task access
-* Missing task records
-* Missing project records
-* Invalid form submissions
+Potential future enhancements include:
 
-## Future Enhancements
-
-Possible improvements:
-
+* REST API integration
 * Email notifications
-* File attachments
-* Task activity history
-* Automated tests
+* Task attachments
+* Real-time notifications
+* Advanced analytics
+* Project activity timeline
+* Pagination
+* PostgreSQL support
+* Cloud deployment
 * Docker support
-* REST API using Django REST Framework
-* PostgreSQL production database
-* Advanced reporting and analytics
+* Automated testing and CI/CD
 
-## Deployment
+---
 
-The application can be deployed as a single Django web service.
+## 📌 Project Type
 
-Typical production flow:
+**Full Stack Web Application**
 
-```text
-GitHub
-   ↓
-Render
-   ↓
-Django Web Service
-   ↓
-Application
-```
+**Architecture:** Server-Side Rendering (SSR)
 
-## Author
+**Domain:** Project & Task Management
 
-**Team Task Manager**
+**Authentication:** Role-Based Authentication
 
-Built using:
+**Database:** SQLite
+
+---
+
+## 👩‍💻 Author
+
+**R. Durga Devi**
+
+Python Full Stack Developer
+
+Technologies:
 
 ```text
 Python
 Django
-SQLite
 HTML
 CSS
+JavaScript
 Bootstrap
+SQLite
+Git
+GitHub
+```
+
+---
+
+## ⭐ Project Goal
+
+The goal of this project is to build a practical enterprise-style team workspace where administrators can manage projects and tasks while team members can collaborate through task updates and progress tracking.
+
+---
+
+## 📄 License
+
+This project is developed for educational, portfolio and demonstration purposes.
+
+```
 ```
