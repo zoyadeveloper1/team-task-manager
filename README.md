@@ -15,6 +15,7 @@ The application provides role-based access for:
 * **Admin**
 * **Team Member**
 
+
 (image-1.png)
 
 Admins can create projects, manage team members, assign tasks, set priorities and deadlines, and monitor overall progress.
