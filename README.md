@@ -451,67 +451,6 @@ The project uses Django's built-in security features including:
 
 
 
-## 🌱 Future Improvements
-
-Potential future enhancements include:
-
-* REST API integration
-* Email notifications
-* Task attachments
-* Real-time notifications
-* Advanced analytics
-* Project activity timeline
-* Pagination
-* PostgreSQL support
-* Cloud deployment
-* Docker support
-* Automated testing and CI/CD
-
-
-## 📌 Project Type
-
-**Full Stack Web Application**
-
-**Architecture:** Server-Side Rendering (SSR)
-
-**Domain:** Project & Task Management
-
-**Authentication:** Role-Based Authentication
-
-**Database:** SQLite
-
-
-## 👩‍💻 Author
-
-**R. Durga Devi**
-
-Python Full Stack Developer
-
-Technologies:
-
-
-Python
-Django
-HTML
-CSS
-JavaScript
-Bootstrap
-SQLite
-Git
-GitHub
-
-
----
-
-## ⭐ Project Goal
-
-The goal of this project is to build a practical enterprise-style team workspace where administrators can manage projects and tasks while team members can collaborate through task updates and progress tracking.
-
----
-
-## 📄 License
-
-This project is developed for educational, portfolio and demonstration purposes.
 
 
 
@@ -645,3 +584,66 @@ Automated tests — Planned
 * The ER diagram/database schema is included in the repository.
 * Local development instructions are provided to run the project successfully.
 * A live deployment link will be added after deployment, if available.
+
+
+# 🌱 Future Improvements
+
+Potential future enhancements include:
+
+* REST API integration
+* Email notifications
+* Task attachments
+* Real-time notifications
+* Advanced analytics
+* Project activity timeline
+* Pagination
+* PostgreSQL support
+* Cloud deployment
+* Docker support
+* Automated testing and CI/CD
+
+
+## 📌 Project Type
+
+**Full Stack Web Application**
+
+**Architecture:** Server-Side Rendering (SSR)
+
+**Domain:** Project & Task Management
+
+**Authentication:** Role-Based Authentication
+
+**Database:** SQLite
+
+
+## 👩‍💻 Author
+
+**R. Durga Devi**
+
+Python Full Stack Developer
+
+Technologies:
+
+
+Python
+Django
+HTML
+CSS
+JavaScript
+Bootstrap
+SQLite
+Git
+GitHub
+
+
+---
+
+## ⭐ Project Goal
+
+The goal of this project is to build a practical enterprise-style team workspace where administrators can manage projects and tasks while team members can collaborate through task updates and progress tracking.
+
+---
+
+## 📄 License
+
+This project is developed for educational, portfolio and demonstration purposes.
