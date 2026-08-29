@@ -4,7 +4,7 @@ A modern **Server-Side Rendered (SSR) Team Task Management System** built with *
 
 The application allows administrators to manage projects, team members, and tasks, while team members can view their assigned tasks, update task status, and add progress updates.
 
-(image.png)
+
 
 ## 🚀 Project Overview
 
@@ -16,7 +16,7 @@ The application provides role-based access for:
 * **Team Member**
 
 
-(image-1.png)
+
 
 Admins can create projects, manage team members, assign tasks, set priorities and deadlines, and monitor overall progress.
 
